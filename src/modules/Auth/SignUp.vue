@@ -5,7 +5,7 @@
           <h3 class="tw-font-bold mb-0 tw-text-3xl">Create Account</h3>
           <span class="tw-text-sm"
             >Already have an account?
-            <router-link to="/sign-in" class="tw-text-primary">Login</router-link>
+            <router-link to="/" class="tw-text-primary">Login</router-link>
           </span>
         </div>
         <validation-observer v-slot="{ invalid, handleSubmit }">

@@ -143,7 +143,7 @@
         //   user_password: this.credentials.password,
         // };
         // this.loginUser(credentials);
-        this.$router.push('/')
+        this.$router.push('/dashboard')
       },
     },
   

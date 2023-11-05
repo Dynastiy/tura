@@ -4,7 +4,7 @@ const SignUp = () => import("@/modules/Auth/SignUp.vue");
 
 const routes = [
   {
-    path: "/sign-in",
+    path: "/",
     name: "sign-in",
     component: SignIn,
     meta: {
