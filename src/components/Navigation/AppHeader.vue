@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="" id="mobile-drawer">
     <div
       class="tw-p-6 tw-bg-white tw-shadow-sm md:tw-relative lg:tw-relative tw-z-auto lg:tw-z-10 md:tw-z-10"
     >
@@ -18,7 +18,7 @@
           >TURA</span
         >
         <span role="button" class="lg:tw-block md:tw-block tw-hidden">
-          <i-icon icon="ep:menu" width="25px" />
+          <i-icon icon="gridicons:user" width="25px" />
         </span>
       </div>
     </div>
@@ -31,42 +31,46 @@
       >
         <div class="tw-mt-8">
           <div class="text-center">
-          <span
-            class="tw-mb-3 user-icon tw-h-[60px] tw-mx-auto tw-bg-gray4 tw-w-[60px] tw-rounded-[50%] tw-flex align-items-center tw-justify-center"
-          >
-            <i-icon icon="gridicons:user" width="80px" />
-          </span>
-          <h5 class="tw-mb-0 tw-font-bold tw-text-md">{{ "BossJohn" }}</h5>
-          <span class="tw-text-sm">{{ "user.user_email" }}</span>
-        </div>
-        <ul class="tw-p-0 tw-flex tw-flex-col tw-gap-6 tw-mt-4">
-          <li v-for="item in menu" :key="item.id">
-            <div class="menu-item tw-px-6">
-              <span
-                class="menu-item-link"
-                :role="item.header ? '' : 'button'"
-                @click="item.hasChildren ? openSubMenu(item) : goToLink(item)"
-                :class="{ 'active-link': item.parent === routeParent }"
-              >
-                <div class="d-flex align-items-center" style="gap: 10px">
-                  <i-icon
-                    :icon="item.icon"
-                    v-if="item.icon"
-                    class="menu-item-icon"
-                  />
-                  <span class="tw-flex flex-column">
-                    <span
-                    class="tw-text-sm"
-                      :class="item.header ? 'menu-title-header' : 'menu-title'"
-                    >
-                      {{ item.title }}
-                    </span>
-                    <!-- <span class="tw-text-xs tw-text-gray4">
+            <span
+              class="tw-mb-3 user-icon tw-h-[60px] tw-mx-auto tw-bg-gray4 tw-w-[60px] tw-rounded-[50%] tw-flex align-items-center tw-justify-center"
+            >
+              <i-icon icon="gridicons:user" width="80px" />
+            </span>
+            <h5 class="tw-mb-0 tw-font-bold tw-text-md tw-capitalize">
+              {{ user.username }}
+            </h5>
+            <span class="tw-text-xs">{{ user.user_email }}</span>
+          </div>
+          <ul class="tw-p-0 tw-flex tw-flex-col tw-gap-2 tw-mt-4">
+            <li v-for="item in menu" :key="item.id">
+              <div class="menu-item tw-px-3">
+                <span
+                  class="menu-item-link"
+                  :role="item.header ? '' : 'button'"
+                  @click="item.hasChildren ? openSubMenu(item) : goToLink(item)"
+                  :class="{ 'active-link': item.parent === routeParent }"
+                >
+                  <div class="d-flex align-items-center" style="gap: 10px">
+                    <i-icon
+                      :icon="item.icon"
+                      v-if="item.icon"
+                      class="menu-item-icon"
+                    />
+                    <span class="tw-flex flex-column">
+                      <span
+                        class="tw-text-sm"
+                        :class="
+                          item.header ? 'menu-title-header' : 'menu-title'
+                        "
+                      >
+                        {{ item.title }}
+                      </span>
+                      <!-- <span class="tw-text-xs tw-text-gray4">
                       {{ item.sub_title }}
                     </span> -->
-                  </span>
-                </div>
-                <!-- <span v-if="item.hasChildren">
+                    </span>
+                  </div>
+                  <!-- <span v-if="item.hasChildren">
                   <i-icon
                     :icon="
                       subMenu === item.id ? 'prime:angle-down' : 'prime:angle-right'
@@ -74,10 +78,10 @@
                     width="30px"
                   />
                 </span> -->
-              </span>
-            </div>
-          </li>
-        </ul>
+                </span>
+              </div>
+            </li>
+          </ul>
         </div>
       </el-drawer>
     </div>
@@ -94,12 +98,93 @@ export default {
     },
   },
   components: {},
+  
   data() {
     return {
       drawer: false,
     };
   },
+
+  methods: {
+    goToLink(item) {
+      this.$router.push(item.url).catch(() => {});
+    },
+  },
+
+  computed: {
+    routeName() {
+      return this.$route.meta.name;
+    },
+    routeParent() {
+      return this.$route.meta.parent;
+    },
+    user() {
+      return this.$store.getters["auth/getUser"];
+    },
+    userMeta() {
+      return this.$store.getters["auth/getUserMeta"];
+    },
+  },
 };
 </script>
 
-<style></style>
+<style>
+#mobile-drawer ul li .menu-item-link {
+  color: var(--gray-900);
+  font-weight: 500;
+  display: flex;
+  display: inline-flex;
+  display: -webkit-flex;
+  gap: 8px;
+  font-size: 13px;
+  padding: 0.6rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#mobile-drawer ul li .menu-item-link:hover {
+  /* background-color: var(--secondary-color); */
+  color: var(--primary-color);
+  transition: all 0.3s;
+}
+
+#mobile-drawer .menu-icon {
+  background-color: var(--white-50);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  /* margin-bottom: 30px; */
+}
+
+#mobile-drawer ul li .menu-item-link.active-link {
+  background-color: var(--primary-color);
+  color: var(--white-50);
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+#mobile-drawer ul li .menu-item-link .menu-item-icon,
+#mobile-drawer ul li .sub-menu .sub-menu-items .menu-item-icon {
+  font-size: 30px;
+  background: #fff;
+  color: var(--primary-color);
+  padding: 5px;
+  border-radius: 50%;
+}
+
+#mobile-drawer.collapsible ul li .sub-menu .sub-menu-items {
+  padding: 1em 0 1em 1.8rem;
+}
+
+#mobile-drawer ul li .sub-menu .sub-menu-items {
+  color: var(--primary-100);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 1.3em 0 1em 2.5rem;
+}
+
+#mobile-drawer ul li .sub-menu .sub-menu-items.active-sub-menu {
+  background-color: var(--primary-color);
+  color: var(--gray-800);
+}
+</style>

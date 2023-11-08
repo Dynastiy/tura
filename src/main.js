@@ -89,10 +89,11 @@ Vue.use(VueSweetalert2, {
   },
 });
 
+import services from "@/services/index";
 
 // Filters 
 Vue.filter("formatCurrency", function (value) {
-  if (!value) return "";
+  if (!value) return "0.00";
   value = Number(value).toLocaleString("en-US", {
     style: "currency",
     currency: "NGN",
@@ -101,7 +102,7 @@ Vue.filter("formatCurrency", function (value) {
 });
 
 Vue.filter("formatMoney", function (value) {
-  if (!value) return "";
+  if (!value) return "0.00";
   value = Number(value).toLocaleString();
   return value;
 });
@@ -116,5 +117,6 @@ Vue.filter("formatDate", function (value) {
 new Vue({
   router,
   store,
+  services,
   render: (h) => h(App),
 }).$mount("#app");

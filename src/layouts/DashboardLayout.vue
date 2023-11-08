@@ -5,17 +5,16 @@
       <app-drawer :menu="menu"/>
     </div>
     <div id="main" class="lg:tw-ml-[250px] md:tw-ml-[250px]">
-      <div class="tw-p-6" >
-        <div  v-if="routeParent !== 'dashboard'">
+      <div class="tw-py-6 tw-px-5" >
+        <div  v-if="routeParent !== 'dashboard'" class="tw-mb-8">
           <div class="tw-flex tw-justify-between tw-align-items-center">
           <span role="button" @click="$router.go(-1)" >
             <i-icon icon="ic:twotone-arrow-back" width="20px" />
           </span>
           <div class="tw-w-full tw-text-center">
-            <h5 class="tw-capitalize tw-font-semibold tw-text-2xl tw-font-semibold">{{ routeParent }}</h5>
+            <h5 class="tw-capitalize tw-font-semibold tw-text-xl tw-font-semibold">{{ routeParent.split('-').join(" ") }}</h5>
           </div>
         </div>
-        <hr />
         </div>
        
         <slot />
@@ -38,7 +37,7 @@ export default {
           title: "Dashboard",
           sub_title: "Overview of your SamzugaGPT",
           icon: "ic:outline-dashboard",
-          url: "/dashboard",
+          url: "/",
           header: false,
           parent: "dashboard",
         },
@@ -83,15 +82,15 @@ export default {
         //   parent: "swap",
         // },
 
-        // {
-        //   id: 8,
-        //   title: "Refer and Earn",
-        //   sub_title: "Earn amazing bonuses",
-        //   icon: "ri:share-line",
-        //   url: "/referral",
-        //   hasChildren: false,
-        //   parent: "referral",
-        // },
+        {
+          id: 8,
+          title: "Refer and Earn",
+          sub_title: "Earn amazing bonuses",
+          icon: "ri:share-line",
+          url: "/referral",
+          hasChildren: false,
+          parent: "referral",
+        },
 
         {
           id: 7,
@@ -136,7 +135,7 @@ export default {
     }
   },
   beforeMount(){
-    // this.$store.dispatch('auth/generateWalletAddress', this.user.user_id)
+    this.$store.dispatch('auth/generateWalletAddress', this.user.user_id)
   },
   computed: {
     routeParent() {

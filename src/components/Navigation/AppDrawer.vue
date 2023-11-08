@@ -1,14 +1,14 @@
 <template>
   <div
     id="app-drawer"
-    class="tw-pt-6 tw-pb-24 lg:tw-z-20 md:tw-z-20 lg:tw-fixed tw-shadow-lg md:tw-fixed tw-absolute lg:tw-left-0 md:tw-left-0 tw-top-22 tw-h-screen tw-overflow-auto tw-w-[250px]"
+    class=" tw-bg-white tw-pt-6 tw-pb-24 lg:tw-z-20 md:tw-z-20 lg:tw-fixed tw-shadow-lg md:tw-fixed tw-absolute lg:tw-left-0 md:tw-left-0 tw-top-22 tw-h-screen tw-overflow-auto tw-w-[250px]"
   >
     <!-- <div>
       {{ userMeta }}
     </div> -->
-    <ul class="tw-p-0 tw-flex tw-flex-col tw-gap-4">
+    <ul class="tw-p-0 tw-flex tw-flex-col tw-gap-3">
       <li v-for="(item, idx) in menu" :key="idx">
-        <div class="menu-item  tw-px-4">
+        <div class="menu-item tw-px-3">
           <span
             class="menu-item-link"
             :role="item.header ? '' : 'button'"
@@ -141,32 +141,32 @@ export default {
   display: flex;
   display: inline-flex;
   display: -webkit-flex;
-  gap: 10px;
-  font-size: 14px;
+  gap: 8px;
+  font-size: 13px;
   padding: 0.6rem;
   justify-content: space-between;
   align-items: center;
 }
 
 #app-drawer ul li .menu-item-link:hover {
-  background-color: var(--secondary-color);
-  color: var(--gray-100);
+  /* background-color: var(--secondary-color); */
+  color: var(--primary-color);
   transition: all 0.3s;
 }
 
 #app-drawer .menu-icon {
   background-color: var(--white-50);
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height:60px;
   border-radius: 50%;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 #app-drawer ul li .menu-item-link.active-link {
   background-color: var(--primary-color);
   color: var(--white-50);
   font-weight: 500;
-  border-radius: 10px;
+  border-radius: 6px;
 }
 
 #app-drawer ul li .menu-item-link .menu-item-icon,
