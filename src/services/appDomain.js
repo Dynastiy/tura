@@ -30,7 +30,6 @@ const appDomain = {
   },
 
   //   get Transactions
-
   async getTransactions(params, page) {
     return $request
       .get(`/transactions?user_id=${params}&pageno=${page}`)

@@ -1,22 +1,25 @@
 <template>
   <div class="">
-    <app-header :menu="menu" class="md:tw-sticky tw-top-0 sm:tw-z-0"/>
+    <app-header :menu="menu" class="md:tw-sticky tw-top-0 sm:tw-z-0" />
     <div class="lg:tw-block md:tw-block tw-hidden">
-      <app-drawer :menu="menu"/>
+      <app-drawer :menu="menu" />
     </div>
     <div id="main" class="lg:tw-ml-[250px] md:tw-ml-[250px]">
-      <div class="tw-py-6 tw-px-5" >
-        <div  v-if="routeParent !== 'dashboard'" class="tw-mb-8">
+      <div class="tw-py-6 tw-px-5">
+        <div v-if="routeParent !== 'dashboard'" class="tw-mb-8">
           <div class="tw-flex tw-justify-between tw-align-items-center">
-          <span role="button" @click="$router.go(-1)" >
-            <i-icon icon="ic:twotone-arrow-back" width="20px" />
-          </span>
-          <div class="tw-w-full tw-text-center">
-            <h5 class="tw-capitalize tw-font-semibold tw-text-xl tw-font-semibold">{{ routeParent.split('-').join(" ") }}</h5>
+            <span role="button" @click="$router.go(-1)">
+              <i-icon icon="ic:twotone-arrow-back" width="20px" />
+            </span>
+            <div class="tw-w-full tw-text-center">
+              <h5
+                class="tw-capitalize tw-font-semibold tw-text-xl tw-font-semibold"
+              >
+                {{ routeParent.split("-").join(" ") }}
+              </h5>
+            </div>
           </div>
         </div>
-        </div>
-       
         <slot />
       </div>
     </div>
@@ -29,7 +32,7 @@ import AppHeader from "@/components/Navigation/AppHeader.vue";
 export default {
   components: { AppDrawer, AppHeader },
   name: "DashboardLayout",
-  data(){
+  data() {
     return {
       menu: [
         {
@@ -132,10 +135,10 @@ export default {
           parent: "sign-out",
         },
       ],
-    }
+    };
   },
-  beforeMount(){
-    this.$store.dispatch('auth/generateWalletAddress', this.user.user_id)
+  beforeMount() {
+    this.$store.dispatch("auth/generateWalletAddress", this.user.user_id);
   },
   computed: {
     routeParent() {
