@@ -19,9 +19,12 @@ const $axios = axios.create({
 // Add access token to header if any
 // const accessToken = Cookies.get(config.accessTokenStorageKey);
 const accessToken = config.apiKey;
+<<<<<<< HEAD
 
 console.log(accessToken, "mmmm");
 console.log(config.apiKey, "kkkk");
+=======
+>>>>>>> a0fe648703822a2e725b0be9b040f61d45c4abd2
 if (accessToken) {
   $axios.defaults.headers.common["authorization"] = "Bearer " + accessToken;
 } else {

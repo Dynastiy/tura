@@ -25,6 +25,7 @@
             <b-skeleton width="55%"></b-skeleton>
             <b-skeleton width="70%"></b-skeleton>
           </div>
+<<<<<<< HEAD
           <div class="tw-w-full tw-flex tw-gap-3">
             <div
               class="tw-w-full tw-bg-light tw-rounded-lg tw-p-4"
@@ -35,6 +36,18 @@
               <b-skeleton width="55%"></b-skeleton>
               <b-skeleton width="70%"></b-skeleton>
             </div>
+=======
+          <div class="tw-w-full tw-flex tw-gap-3 ">
+            <div
+            class="tw-w-full tw-bg-light tw-rounded-lg tw-p-4"
+            v-for="item in 3"
+            :key="item"
+          >
+            <b-skeleton width="85%"></b-skeleton>
+            <b-skeleton width="55%"></b-skeleton>
+            <b-skeleton width="70%"></b-skeleton>
+          </div>
+>>>>>>> a0fe648703822a2e725b0be9b040f61d45c4abd2
           </div>
         </div>
       </template>
@@ -101,7 +114,10 @@
         </div>
       </div>
     </b-skeleton-wrapper>
+<<<<<<< HEAD
 
+=======
+>>>>>>> a0fe648703822a2e725b0be9b040f61d45c4abd2
     <!-- Wallet Actions  -->
     <hr class="tw-my-3" />
     <h6 class="tw-mb-3 tw-text-sm">Quick Actions</h6>
@@ -113,7 +129,11 @@
         :key="idx"
         role="button"
         class="tw-flex tw-justify-center tw-flex-col"
+<<<<<<< HEAD
         @click="command(item)"
+=======
+        @click="$router.push(item.href)"
+>>>>>>> a0fe648703822a2e725b0be9b040f61d45c4abd2
       >
         <span
           class="tw-flex tw-items-center tw-bg-white tw-shadow-lg tw-p-4 tw-w-fit tw-rounded-full"
@@ -126,6 +146,7 @@
       </span>
     </div>
     <hr class="tw-my-3" />
+<<<<<<< HEAD
 
     <!-- Wallet Actions Modals  -->
 
@@ -137,10 +158,13 @@
 
     <!-- Swap Currency -->
     <swap-funds v-if="action === 'swap'" @close="closeModal" />
+=======
+>>>>>>> a0fe648703822a2e725b0be9b040f61d45c4abd2
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 import DepositFunds from "@/components/Dashboard/DepositFunds.vue";
 import WithdrawFunds from "@/components/Dashboard/WithdrawFunds.vue";
 import SwapFunds from "@/components/Dashboard/SwapFunds.vue";
@@ -162,10 +186,18 @@ export default {
       // },
       viewAmount: true,
       dialogVisible: true,
+=======
+export default {
+  data() {
+    return {
+      wallet: {},
+      viewAmount: true,
+>>>>>>> a0fe648703822a2e725b0be9b040f61d45c4abd2
       actions: [
         {
           title: "deposit",
           icon: "teenyicons:send-up-solid",
+<<<<<<< HEAD
           href: "deposit",
           link: false,
         },
@@ -174,11 +206,20 @@ export default {
           icon: "mi:repeat",
           href: "swap",
           link: false,
+=======
+          href: "/deposit",
+        },
+        {
+          title: "withdraw",
+          icon: "teenyicons:send-down-solid",
+          href: "/withdraw",
+>>>>>>> a0fe648703822a2e725b0be9b040f61d45c4abd2
         },
         {
           title: "staking",
           icon: "eva:lock-outline",
           href: "/staking",
+<<<<<<< HEAD
           link: true,
         },
         {
@@ -227,6 +268,17 @@ export default {
       balances: [],
       loading: false,
       action: null,
+=======
+        },
+        {
+          title: "swap",
+          icon: "mi:repeat",
+          href: "/swap",
+        },
+      ],
+      balances: [],
+      loading: false,
+>>>>>>> a0fe648703822a2e725b0be9b040f61d45c4abd2
     };
   },
 
@@ -247,6 +299,7 @@ export default {
     },
 
     getStakingBalances() {
+<<<<<<< HEAD
       this.appDomain
         .getWallets(
           this.user.user_id,
@@ -268,6 +321,12 @@ export default {
 
     closeModal() {
       this.action = null;
+=======
+      this.appDomain.getWallets(this.user.user_id, "usdt_interest,usdt_locked,usdt_referral_bonus").then((res) => {
+        console.log(res);
+        this.balances = res.data;
+      });
+>>>>>>> a0fe648703822a2e725b0be9b040f61d45c4abd2
     },
   },
 
@@ -289,7 +348,10 @@ export default {
   background: url("@/assets/img/walletbg.jpg");
   background-color: var(--primary-dark);
   background-blend-mode: overlay;
+<<<<<<< HEAD
   background-size: 10%;
+=======
+>>>>>>> a0fe648703822a2e725b0be9b040f61d45c4abd2
 }
 
 .other-wallets {
