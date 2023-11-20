@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div class="tw-bg-white tw-p-6 tw-rounded-lg">
     <!-- <div>
       <label for="">Select Wallet</label>
@@ -67,16 +66,11 @@
         <button class="outline-btn" @click="$router.go(-1)">Go Back</button>
       </div>
     </div>
-=======
-  <div>
-    Deposit Page
->>>>>>> a0fe648703822a2e725b0be9b040f61d45c4abd2
   </div>
 </template>
 
 <script>
 export default {
-<<<<<<< HEAD
   data() {
     return {
       color: {
@@ -129,12 +123,3 @@ export default {
   color: var(--gray-600);
 }
 </style>
-=======
-
-}
-</script>
-
-<style>
-
-</style>
->>>>>>> a0fe648703822a2e725b0be9b040f61d45c4abd2

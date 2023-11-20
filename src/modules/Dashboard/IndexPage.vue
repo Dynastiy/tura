@@ -101,6 +101,7 @@
         </div>
       </div>
     </b-skeleton-wrapper>
+
     <!-- Wallet Actions  -->
     <hr class="tw-my-3" />
     <h6 class="tw-mb-3 tw-text-sm">Quick Actions</h6>
@@ -186,6 +187,7 @@ export default {
           href: "withdraw",
           link: false,
         },
+      ],
       wallet: {},
       // balances: [
       // {
@@ -225,14 +227,15 @@ export default {
       balances: [],
       loading: false,
       action: null,
-        },
-        {
-          title: "swap",
-          icon: "mi:repeat",
-          href: "/swap",
-        },
-      ],
-      balances: [],
+    };
+  },
+
+  methods: {
+    getBalances() {
+      this.loading = true;
+      this.appDomain
+        .getWallets(this.user.user_id, "usdt")
+        .then((res) => {
           console.log(res);
           this.wallet = res.data[0];
           this.loading = false;
