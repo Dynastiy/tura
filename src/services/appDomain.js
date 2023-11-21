@@ -10,7 +10,7 @@ const appDomain = {
 
   async sendToken(params) {
     return $request
-      .get(`/verify-email-address?email_address=${params}&fire_email=false`)
+      .get(`/verify-email-address?email_address=${params}&fire_email=true`)
       .then((response) => response.data);
   },
 

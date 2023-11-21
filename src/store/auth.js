@@ -104,7 +104,6 @@ export default {
   actions: {
     // Login request
     async loginUser({ commit }, payload) {
-      NProgress.start();
       commit("SET_LOADING", true);
       try {
         let res = await $request.post(`users/login`, payload);
@@ -138,7 +137,7 @@ export default {
           position: "top",
           // all of other options may go here
         });
-        if (error.data) {
+        if (error) {
           let errorPayload = error.data;
           if (errorPayload.message) {
             commit("SET_ERROR", errorPayload.message);

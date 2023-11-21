@@ -130,7 +130,7 @@ export default {
           title: "Sign Out",
           sub_title: "Sign Out",
           icon: "fe:logout",
-          url: "/login",
+          url: "/sign-in",
           hasChildren: false,
           parent: "sign-out",
         },
