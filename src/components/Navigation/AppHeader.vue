@@ -59,7 +59,7 @@
       <el-drawer
         :with-header="false"
         :visible.sync="drawer"
-        direction="ltr"
+        direction="rtl"
         size="80%"
       >
         <div class="tw-mt-8">
