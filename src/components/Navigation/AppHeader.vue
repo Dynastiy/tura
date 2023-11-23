@@ -4,22 +4,55 @@
       class="tw-p-6 tw-bg-white tw-shadow-sm md:tw-relative lg:tw-relative tw-z-auto lg:tw-z-10 md:tw-z-10"
     >
       <div class="tw-flex tw-justify-between align-items-center">
-        <span
-          role="button"
-          class="lg:tw-hidden md:tw-hidden"
-          @click="drawer = !drawer"
-        >
-          <i-icon icon="grommet-icons:menu" width="28px" />
-        </span>
-        <span
-          class="tw-font-bold"
-          role="button"
-          @click="$router.push('/dashboard')"
+        <span class="tw-font-bold" role="button" @click="$router.push('/')"
           >TURA</span
         >
-        <span role="button" class="lg:tw-block md:tw-block tw-hidden">
-          <i-icon icon="gridicons:user" width="25px" />
-        </span>
+
+        <div class="tw-flex tw-gap-3 tw-items-center">
+          <div class="tw-flex tw-items-center tw-gap-1">
+            <span
+              class="tw-uppercase tw-bg-gray-300 tw-h-[30px] tw-w-[30px] tw-flex tw-items-center tw-justify-center tw-font-bold tw-rounded-full"
+            >
+              {{ user.username.charAt(0) }}
+            </span>
+            <div class="lg:tw-block md:tw-block tw-hidden">
+              <!-- <h5 class="tw-mb-0 tw-font-bold tw-text-md">Welcome</h5> -->
+              <span
+                class="tw-text-sm tw-capitalize tw-font-semibold tw-block"
+                >{{ "Hi, " + user.username }}</span
+              >
+              <span class="tw-text-xs tw-block">{{ user.user_email }}</span>
+            </div>
+            <div>
+              <!-- <span role="button">
+                  <i-icon icon="prime:angle-down" width="28px" />
+                </span> -->
+
+              <el-dropdown trigger="click">
+                <span class="el-dropdown-link">
+                  <i-icon icon="prime:angle-down" width="20px" />
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item
+                    ><span @click="$router.push('/personal-information')">
+                      View Profile
+                    </span></el-dropdown-item
+                  >
+                  <el-dropdown-item>
+                    <span @click="logout"> Logout </span>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
+          </div>
+          <span
+            role="button"
+            class="lg:tw-hidden md:tw-hidden"
+            @click="drawer = !drawer"
+          >
+            <i-icon icon="grommet-icons:menu" width="28px" />
+          </span>
+        </div>
       </div>
     </div>
     <div class="">
@@ -98,7 +131,7 @@ export default {
     },
   },
   components: {},
-  
+
   data() {
     return {
       drawer: false,
@@ -108,6 +141,40 @@ export default {
   methods: {
     goToLink(item) {
       this.$router.push(item.url).catch(() => {});
+    },
+
+    logout() {
+      this.$swal
+        .fire({
+          title: "Uhhhh! 😔",
+          text: "Are you sure you want to log out?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, logout!",
+        })
+        .then((result) => {
+          console.log(result, "kkk");
+          if (result.isConfirmed) {
+            this.userLogout();
+          }
+        });
+    },
+
+    userLogout() {
+      this.$store.dispatch("auth/logout");
+      this.$swal
+        .fire({
+          title: "Woo hoo 😫",
+          text: "Logged out succesfully",
+          icon: "success",
+          confirmButtonText: "Ok!",
+        })
+        .then((result) => {
+          console.log(result, "kkk");
+          if (result.isConfirmed) {
+            this.$router.go();
+          }
+        });
     },
   },
 

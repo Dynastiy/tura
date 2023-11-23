@@ -92,9 +92,10 @@ export default {
     async LOGOUT(state) {
       state.user = null;
       state.token = null;
-      localStorage.removeItem("vuex");
+      localStorage.removeItem("token");
       localStorage.clear();
     },
+    
     RESET(state) {
       Object.keys(state).forEach((key) => {
         Object.assign(state[key], null);
@@ -215,6 +216,11 @@ export default {
         commit("SET_ERROR", "Internal connection error, please try again.");
         return error.data;
       }
+    },
+
+     // Logout Request
+     logout({ commit }) {
+      commit("LOGOUT");
     },
   },
 };

@@ -406,3 +406,15 @@ hr {
     font-weight: 500;
     text-transform: capitalize;
   }
+
+  /* El Dropdown  */
+  .el-dropdown-menu__item:hover {
+    color: var(--primary-color) !important;
+    background-color: var(--gray-100) !important;
+  }
+
+  /* El Collapse  */
+  .el-collapse-item__header {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+  }

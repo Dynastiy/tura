@@ -1,25 +1,22 @@
 <template>
   <div>
-    <div class="tw-flex tw-space-x-3 align-items-center">
+    <!-- <div class="">
+     <div class="tw-flex tw-gap-2">
       <span
-        class="user-icon tw-h-[40px] tw-bg-gray4 tw-w-[40px] tw-rounded-[50%] tw-flex align-items-center tw-justify-center"
+        class="user-icon tw-h-[60px] tw-bg-gray4 tw-w-[60px] tw-rounded-[50%] tw-flex align-items-center tw-justify-center"
       >
-        <i-icon icon="gridicons:user" width="30px" />
+        <i-icon icon="gridicons:user" width="80px" />
       </span>
-      <div>
-        <h5 class="tw-mb-0 tw-font-bold tw-text-md">Welcome</h5>
-        <span class="tw-text-sm tw-capitalize tw-block">{{ user.username }}</span>
-        <span class="tw-text-xs tw-block">{{ user.user_email }}</span>
-       
-      </div>
-    </div>
-
+      <h5 class="tw-mb-0 tw-font-bold tw-text-md tw-capitalize">
+        {{ user.username }}
+      </h5>
+     </div>
+      <span class="tw-text-xs">{{ user.user_email }}</span>
+    </div> -->
     <!-- Wallets  -->
     <b-skeleton-wrapper :loading="loading">
       <template #loading>
-        <div
-          class="tw-flex lg:tw-flex-row md:tw-flex-row tw-flex-col tw-gap-3 tw-mt-4"
-        >
+        <div class="tw-flex lg:tw-flex-row md:tw-flex-row tw-flex-col tw-gap-3">
           <div
             class="md:tw-w-3/5 lg:tw-w-3/5 tw-py-3 tw-rounded-lg tw-w-full tw-bg-light tw-rounded-lg tw-p-4"
           >
@@ -41,9 +38,7 @@
         </div>
       </template>
 
-      <div
-        class="tw-flex lg:tw-flex-row md:tw-flex-row tw-flex-col tw-gap-3 tw-mt-4"
-      >
+      <div class="tw-flex lg:tw-flex-row md:tw-flex-row tw-flex-col tw-gap-3">
         <div
           class="tw-px-4 md:tw-w-3/5 lg:tw-w-3/5 tw-py-3 tw-rounded-lg wallet tw-w-full"
         >
@@ -51,11 +46,14 @@
             <div>
               <div class="tw-mb-2">
                 <h6
-                class="tw-text-[12px] tw-mb-0 tw-font-semibold tw-uppercase tw-text-white"
-              >
-                ROI Balance 
-              </h6>
-              <span class="tw-text-xs tw-text-gray-300 tw-block tw-text-[9.5px]">*This is updated daily</span>
+                  class="tw-text-[12px] tw-mb-0 tw-font-semibold tw-uppercase tw-text-white"
+                >
+                  ROI Balance
+                </h6>
+                <span
+                  class="tw-text-xs tw-text-gray-300 tw-block tw-text-[9.5px]"
+                  >*This is updated daily</span
+                >
               </div>
               <span class="tw-flex align-items-center tw-space-x-1">
                 <h4 class="tw-font-bold tw-text-white tw-text-[25px] tw-mb-0">
@@ -135,12 +133,12 @@
     <div>
       <h6 class="tw-mb-3 tw-text-sm">Other Services</h6>
       <div class="tw-flex tw-items-start tw-gap-1">
-        <button class="primary-btn">
-        Apply for loan
-      </button>
-      <span class="tw-bg-red-100 tw-font-semibold tw-px-3 tw-py-1 tw-text-red-600 tw-rounded-md tw-text-xs tw-block tw-w-fit">
-        coming soon
-      </span>
+        <button class="primary-btn">Apply for loan</button>
+        <span
+          class="tw-bg-red-100 tw-font-semibold tw-px-3 tw-py-1 tw-text-red-600 tw-rounded-md tw-text-xs tw-block tw-w-fit"
+        >
+          coming soon
+        </span>
       </div>
     </div>
 
@@ -210,7 +208,7 @@ export default {
       balances: [],
       loading: false,
       action: null,
-      emailAddress: ""
+      emailAddress: "",
     };
   },
 
@@ -231,24 +229,21 @@ export default {
     },
 
     changeName(value) {
-      if(value === "usdt") {
-        return 'main balance'
+      if (value === "usdt") {
+        return "main balance";
       }
-      if(value === 'usdt_locked') {
-        return 'locked capital'
+      if (value === "usdt_locked") {
+        return "locked capital";
       }
-      if(value === 'usdt_referral_bonus') {
-        return 'referral bonus'
+      if (value === "usdt_referral_bonus") {
+        return "referral bonus";
       }
-      return
+      return;
     },
 
     getStakingBalances() {
       this.appDomain
-        .getWallets(
-          this.user.user_id,
-          "usdt,usdt_locked,usdt_referral_bonus"
-        )
+        .getWallets(this.user.user_id, "usdt,usdt_locked,usdt_referral_bonus")
         .then((res) => {
           console.log(res);
           this.balances = res.data;
@@ -279,7 +274,7 @@ export default {
     },
   },
 
-  watch:{
+  watch: {
     "user.user_email": {
       handler(val) {
         let emailInfo = val.split("@");
@@ -290,7 +285,7 @@ export default {
       },
       immediate: true,
     },
-  }
+  },
 };
 </script>
 

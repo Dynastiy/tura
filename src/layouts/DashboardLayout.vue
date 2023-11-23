@@ -6,7 +6,7 @@
     </div>
     <div id="main" class="lg:tw-ml-[250px] md:tw-ml-[250px]">
       <div class="tw-py-6 tw-px-5">
-        <div v-if="routeParent !== 'dashboard'" class="tw-mb-8">
+        <!-- <div v-if="routeParent !== 'dashboard'" class="tw-mb-8">
           <div class="tw-flex tw-justify-between tw-align-items-center">
             <span role="button" @click="$router.go(-1)">
               <i-icon icon="ic:twotone-arrow-back" width="20px" />
@@ -19,7 +19,7 @@
               </h5>
             </div>
           </div>
-        </div>
+        </div> -->
         <slot />
       </div>
     </div>
@@ -105,15 +105,15 @@ export default {
           parent: "transaction-history",
         },
 
-        {
-          id: 6,
-          title: "Personal Information",
-          sub_title: "Your profile settings",
-          icon: "solar:user-linear",
-          url: "/personal-information",
-          hasChildren: false,
-          parent: "personal-information",
-        },
+        // {
+        //   id: 6,
+        //   title: "Personal Information",
+        //   sub_title: "Your profile settings",
+        //   icon: "solar:user-linear",
+        //   url: "/personal-information",
+        //   hasChildren: false,
+        //   parent: "personal-information",
+        // },
 
         {
           id: 9,
