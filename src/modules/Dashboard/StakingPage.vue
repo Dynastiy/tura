@@ -18,7 +18,7 @@
           </template>
 
         <div class="tw-bg-primary tw-p-4 lg:tw-w-6/12 md::tw-w-7/12 tw-w-full">
-          <h6 class="tw-text-md tw-font-semibold tw-text-xs tw-uppercase tw-text-center tw-text-white">Staking Balances</h6>
+          <h6 class="tw-text-md tw-font-semibold tw-text-xs tw-uppercase tw-text-center tw-text-white">investment wallet information</h6>
           <div class="tw-flex tw-gap-4 tw-mt-4 tw-w-full">
             <div
               v-for="item in balances"
@@ -63,7 +63,7 @@
                     main_wallet.wallet_balance_raw < 5
                   "
                   class="tw-block tw-text-right tw-text-xs tw-font-semibold tw-text-red-600"
-                  >* Insuffient balance to stake in
+                  >* Insuffient balance to invest in
                   {{ main_wallet.wallet_symbol }} wallet
                 </span>
                 <div class="input-field tw-px-2 tw-py-2 tw-mt-2">
@@ -100,14 +100,14 @@
                     class="text-white"
                   />
                 </span>
-                <span v-else>stake</span>
+                <span v-else>Invest</span>
               </button>
             </div>
           </form>
         </validation-observer>
       </div>
 
-      <div class="tw-bg-white tw-mt-4 tw-p-6 tw-rounded-lg">
+      <!-- <div class="tw-bg-white tw-mt-4 tw-p-6 tw-rounded-lg">
         <h5 class="tw-font-bold tw-text-center">HOW TO STAKE</h5>
         <div class="how-to-stake">
           <ul class="tw-flex tw-flex-col tw-gap-3 tw-p-0">
@@ -121,7 +121,7 @@
               if you deposited SZCB, you will not need to swap
             </li>
             <li>
-              You can then stake your SZCB on this page by clicking the Stake
+              You can then stake your USDT on this page by clicking the Stake
               Button
             </li>
             <li>
@@ -135,7 +135,7 @@
             </li>
           </ul>
         </div>
-      </div>
+      </div> -->
 
       <!-- <modal-wrapper v-if="dialogVisible">
         <template #body>

@@ -43,11 +43,11 @@
           <h6 class="tw-font-normal tw-text-center tw-text-sm tw-mb-0">
             Referred by: {{ userMeta.rimplenet_referrer_sponsor || "No referrer found" }}
           </h6>
-          <h6 class="tw-font-normal tw-text-center tw-text-sm tw-mb-0">
+          <!-- <h6 class="tw-font-normal tw-text-center tw-text-sm tw-mb-0">
             Registered as community member: <span class="status" :class="userMeta.registered_as_community_member === null ? 'not-registered' : 'registered'">
               {{ userMeta.registered_as_community_member === null ? "Not registered" : "registered" }}
             </span>
-          </h6>
+          </h6> -->
           
           <h6 class="tw-font-normal tw-text-center tw-text-sm tw-mb-0">
             Logged in at: {{ (new Date(user.time_of_login * 1000.0)) | formatDate }}

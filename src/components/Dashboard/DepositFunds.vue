@@ -9,8 +9,7 @@
           <p
             class="tw-text-center tw-text-[13px] tw-bg-white tw-p-2 tw-font-medium tw-rounded-lg"
           >
-            Only send <b>USDT</b> (BEP20) to this address. other asset to this
-            address will be lost forever!
+            Only send <b>USDT</b> (BEP20) to this address. Your balance will be credited within two minutes!
           </p>
           <div class="tw-text-center">
             <div
@@ -25,7 +24,7 @@
               </span>
             </div>
             <p class="tw-text-center tw-text-white tw-font-normal tw-text-sm">
-              <b>Minimum deposit</b>: <b>1 USDT</b>
+              <b>Minimum deposit</b>: <b>20 USDT</b>
             </p>
           </div>
           <div class="tw-flex tw-justify-center">

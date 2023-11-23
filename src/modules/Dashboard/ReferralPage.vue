@@ -45,9 +45,8 @@
       <img src="@/assets/img/referral.svg" alt="" />
     </div>
     <h6 class="tw-text-center tw-my-4">
-      Copy your referral link below and share with your friends, you will earn
-      <b>5%</b> on the first deposit of every person you referred, other amazing
-      bonuses awaits as you refer more people.
+      You are entitled to earn
+      <b>10%</b> on the first deposit of the person you referred. Your referral link is shown below:
     </h6>
     <div class="tw-flex tw-justify-center">
       <div
@@ -86,7 +85,7 @@ export default {
   methods: {
     onCopy: function (value) {
       this.$toast.open({
-        message: `Referral Code Copied`,
+        message: `Referral link Copied`,
         type: "success",
         position: "top",
       });
@@ -124,10 +123,11 @@ export default {
     referral_code() {
       let url = config.appDomain;
       let user = this.user.username;
-      return url + "register?ref=" + user;
+      return url + "sign-up?ref=" + user;
     },
     copy_text() {
-      let text = `Check out this recently launched Tura powered by AI, it pays you staking rewards  when you stake cryptocurrency on the platform, you can register through my link ${this.referral_code} to earn staking rewards.`;
+      // let text = `Check out this recently launched Tura powered by AI, it pays you staking rewards  when you stake cryptocurrency on the platform, you can register through my link ${this.referral_code} to earn staking rewards.`;
+      let text = `${this.referral_code}`;
       return text;
     },
   },

@@ -8,7 +8,9 @@
       </span>
       <div>
         <h5 class="tw-mb-0 tw-font-bold tw-text-md">Welcome</h5>
-        <span class="tw-text-sm">John Doe</span>
+        <span class="tw-text-sm tw-capitalize tw-block">{{ user.username }}</span>
+        <span class="tw-text-xs tw-block">{{ user.user_email }}</span>
+       
       </div>
     </div>
 
@@ -47,11 +49,14 @@
         >
           <div class="tw-flex tw-justify-between tw-items-center">
             <div>
-              <h6
-                class="tw-text-[11px] tw-font-normal tw-uppercase tw-text-white"
+              <div class="tw-mb-2">
+                <h6
+                class="tw-text-[12px] tw-mb-0 tw-font-semibold tw-uppercase tw-text-white"
               >
-                staking interest
+                ROI Balance 
               </h6>
+              <span class="tw-text-xs tw-text-gray-300 tw-block tw-text-[9.5px]">*This is updated daily</span>
+              </div>
               <span class="tw-flex align-items-center tw-space-x-1">
                 <h4 class="tw-font-bold tw-text-white tw-text-[25px] tw-mb-0">
                   {{
@@ -82,9 +87,9 @@
           >
             <div class="tw-flex tw-flex-col tw-justify-center tw-h-full">
               <h6
-                class="tw-text-[10px] tw-font-normal tw-uppercase tw-text-white"
+                class="tw-text-[12px] tw-font-semibold tw-uppercase tw-text-white"
               >
-                {{ item.wallet_name.slice(5) }}
+                {{ changeName(item.wallet_id) }}
               </h6>
               <span class="tw-flex align-items-center tw-space-x-1">
                 <h4
@@ -127,6 +132,18 @@
     </div>
     <hr class="tw-my-3" />
 
+    <div>
+      <h6 class="tw-mb-3 tw-text-sm">Other Services</h6>
+      <div class="tw-flex tw-items-start tw-gap-1">
+        <button class="primary-btn">
+        Apply for loan
+      </button>
+      <span class="tw-bg-red-100 tw-font-semibold tw-px-3 tw-py-1 tw-text-red-600 tw-rounded-md tw-text-xs tw-block tw-w-fit">
+        coming soon
+      </span>
+      </div>
+    </div>
+
     <!-- Wallet Actions Modals  -->
 
     <!-- Deposit Funds -->
@@ -141,6 +158,7 @@
 </template>
 
 <script>
+// import { pick } from "lodash";
 import DepositFunds from "@/components/Dashboard/DepositFunds.vue";
 import WithdrawFunds from "@/components/Dashboard/WithdrawFunds.vue";
 import SwapFunds from "@/components/Dashboard/SwapFunds.vue";
@@ -176,9 +194,9 @@ export default {
           link: false,
         },
         {
-          title: "staking",
+          title: "invest",
           icon: "eva:lock-outline",
-          href: "/staking",
+          href: "/invest",
           link: true,
         },
         {
@@ -189,44 +207,10 @@ export default {
         },
       ],
       wallet: {},
-      // balances: [
-      // {
-      //       "wallet_id": "raaf",
-      //       "wallet_balance_raw": 0,
-      //       "wallet_balance_formatted": "RAAF0.000000000",
-      //       "wallet_name": "RAAF",
-      //       "wallet_symbol": "RAAF",
-      //       "wallet_symbol_position": "left",
-      //       "wallet_decimal": "9",
-      //       "wallet_note": "RAAF",
-      //       "wallet_type": "crypto"
-      //   },
-      //   {
-      //       "wallet_id": "ngn",
-      //       "wallet_balance_raw": 0,
-      //       "wallet_balance_formatted": "\u20a60.00",
-      //       "wallet_name": "ngn",
-      //       "wallet_symbol": "\u20a6",
-      //       "wallet_symbol_position": "left",
-      //       "wallet_decimal": "2",
-      //       "wallet_note": "Nigerian Naira",
-      //       "wallet_type": "fiat"
-      //   },
-      //   {
-      //       "wallet_id": "raaf",
-      //       "wallet_balance_raw": 0,
-      //       "wallet_balance_formatted": "RAAF0.000000000",
-      //       "wallet_name": "RAAF",
-      //       "wallet_symbol": "RAAF",
-      //       "wallet_symbol_position": "left",
-      //       "wallet_decimal": "9",
-      //       "wallet_note": "RAAF",
-      //       "wallet_type": "crypto"
-      //   },
-      // ],
       balances: [],
       loading: false,
       action: null,
+      emailAddress: ""
     };
   },
 
@@ -234,7 +218,7 @@ export default {
     getBalances() {
       this.loading = true;
       this.appDomain
-        .getWallets(this.user.user_id, "usdt")
+        .getWallets(this.user.user_id, "usdt_interest")
         .then((res) => {
           console.log(res);
           this.wallet = res.data[0];
@@ -246,11 +230,24 @@ export default {
         });
     },
 
+    changeName(value) {
+      if(value === "usdt") {
+        return 'main balance'
+      }
+      if(value === 'usdt_locked') {
+        return 'locked capital'
+      }
+      if(value === 'usdt_referral_bonus') {
+        return 'referral bonus'
+      }
+      return
+    },
+
     getStakingBalances() {
       this.appDomain
         .getWallets(
           this.user.user_id,
-          "usdt_interest,usdt_locked,usdt_referral_bonus"
+          "usdt,usdt_locked,usdt_referral_bonus"
         )
         .then((res) => {
           console.log(res);
@@ -281,6 +278,19 @@ export default {
       return this.$store.getters["auth/getUser"];
     },
   },
+
+  watch:{
+    "user.user_email": {
+      handler(val) {
+        let emailInfo = val.split("@");
+        let mainEmail = emailInfo[0].split("");
+        let spacing = mainEmail.length;
+        let hideInfo = mainEmail.fill("*", "2", spacing);
+        this.emailAddress = `${hideInfo.join("")}@${emailInfo[1]}`;
+      },
+      immediate: true,
+    },
+  }
 };
 </script>
 

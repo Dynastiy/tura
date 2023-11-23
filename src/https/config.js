@@ -25,7 +25,7 @@ const config = {
     accessTokenExpiresAtStorageKey: "tura_session_expires_at",
     accessTokenExpiryTimeLeftForFrontendAutoRefresh: 18000, // in seconds, 18000secs = 5 hours
     referralCodeStorageKey: "samzugagpt_referral_code",
-    appDomain: "https://goodymarketplace.com/tura/",
+    appDomain: "https://app.turaai.com/",
 
     getSubdomain: () => {
       let host = window.location.host;

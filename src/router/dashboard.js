@@ -139,13 +139,13 @@ const routes = [
   },
 
   {
-    path: "/staking",
-    name: "staking",
+    path: "/invest",
+    name: "invest",
     component: Staking,
     meta: {
       layout: "DashboardLayout",
       parent: 'dashboard',
-      header: "staking",
+      header: "invest",
       requiresAuth: true
     },
   },
