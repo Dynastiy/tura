@@ -5,7 +5,7 @@
     >
       <div class="tw-flex tw-justify-between align-items-center">
         <span class="tw-font-bold" role="button" @click="$router.push('/')"
-          >TURA</span
+          >Tura AI</span
         >
 
         <div class="tw-flex tw-gap-3 tw-items-center">

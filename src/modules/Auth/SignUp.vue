@@ -201,14 +201,14 @@
               <span class="tw-text-[12px]">
                 I agree to Tura
                 <a
-                  href="https://samzuga.com/term-of-service"
+                  href="https://turaai.com/term-of-service"
                   target="_blank"
                   class="tw-text-primary"
                   >Terms of service</a
                 >
                 and
                 <a
-                  href="https://samzuga.com/privacy-policy"
+                  href="https://turaai.com/privacy-policy"
                   target="_blank"
                   class="tw-text-primary"
                   >Privacy policy</a

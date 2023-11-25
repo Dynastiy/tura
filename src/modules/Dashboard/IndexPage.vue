@@ -59,7 +59,7 @@
                 <h4 class="tw-font-bold tw-text-white tw-text-[25px] tw-mb-0">
                   {{
                     viewAmount
-                      ? wallet.wallet_balance_raw + " " + wallet.wallet_symbol
+                      ? wallet.wallet_balance_raw + "USDT"
                       : "****"
                   }}
                 </h4>
@@ -93,7 +93,7 @@
                 <h4
                   class="tw-font-semibold tw-text-white tw-text-[25px] tw-mb-0"
                 >
-                  {{ item.wallet_balance_raw | formatMoney }}
+                  {{ item.wallet_balance_raw }}
                 </h4>
                 <!-- <span class="tw-text-white tw-">
                 {{ item.wallet_symbol }}
