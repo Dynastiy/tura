@@ -1,4 +1,4 @@
-import $request from "@/https/axios";
+import $request from "@/https/middleware";
 
 const middleware = {
   // Stake
