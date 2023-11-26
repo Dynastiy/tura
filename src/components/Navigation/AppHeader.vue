@@ -140,7 +140,11 @@ export default {
 
   methods: {
     goToLink(item) {
-      this.$router.push(item.url).catch(() => {});
+      if (item.parent === "sign-out") {
+        this.logout();
+      } else {
+        this.$router.push(item.url).catch(() => {});
+      }
     },
 
     logout() {

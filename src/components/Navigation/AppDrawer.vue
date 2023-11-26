@@ -55,28 +55,46 @@ export default {
 
   methods: {
     goToLink(item) {
-      // if (this.userMeta.nll_user_email_address_verified === null) {
-      //   if (item.parent === "deposit" || item.parent === "withdrawal") {
-      //     this.$swal
-      //       .fire({
-      //         title: "Your account is not verified",
-      //         text: "You can't deposit or withdraw until you complete the verification proces",
-      //         icon: "warning",
-      //         showCancelButton: true,
-      //         confirmButtonText: "Verify Now!",
-      //       })
-      //       .then((result) => {
-      //         if (result.isConfirmed) {
-      //           this.$router.push("/email-verification");
-      //         }
-      //       });
-      //   }
-      //   else {
-      //     this.$router.push(item.url).catch(() => {});
-      //   }
-      // } else {
+      if(item.parent === 'sign-out') {
+        this.logout()
+      }
+      else {
         this.$router.push(item.url).catch(() => {});
-      // }
+      }
+    },
+
+    logout() {
+      this.$swal
+        .fire({
+          title: "Uhhhh! 😔",
+          text: "Are you sure you want to log out?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, logout!",
+        })
+        .then((result) => {
+          console.log(result, "kkk");
+          if (result.isConfirmed) {
+            this.userLogout();
+          }
+        });
+    },
+
+    userLogout() {
+      this.$store.dispatch("auth/logout");
+      this.$swal
+        .fire({
+          title: "Woo hoo 😫",
+          text: "Logged out succesfully",
+          icon: "success",
+          confirmButtonText: "Ok!",
+        })
+        .then((result) => {
+          console.log(result, "kkk");
+          if (result.isConfirmed) {
+            this.$router.go();
+          }
+        });
     },
 
     collapseAppDrawer() {

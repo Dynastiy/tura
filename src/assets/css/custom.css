@@ -418,3 +418,8 @@ hr {
     font-size: 15px !important;
     font-weight: 600 !important;
   }
+
+  /* Sweet Alert  */
+div:where(.swal2-container) {
+    z-index: 99999 !important;
+}

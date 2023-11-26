@@ -43,6 +43,7 @@ export default {
           url: "/",
           header: false,
           parent: "dashboard",
+          isLink: true,
         },
 
         // {
@@ -92,6 +93,7 @@ export default {
           icon: "ri:share-line",
           url: "/referral",
           hasChildren: false,
+          isLink: true,
           parent: "referral",
         },
 
@@ -101,6 +103,7 @@ export default {
           sub_title: "See transactions you've made",
           icon: "ep:list",
           url: "/transaction-history",
+          isLink: true,
           hasChildren: false,
           parent: "transaction-history",
         },
@@ -122,6 +125,7 @@ export default {
           icon: "charm:help",
           url: "/help-and-support",
           hasChildren: false,
+          isLink: true,
           parent: "help-and-support",
         },
 
@@ -130,8 +134,8 @@ export default {
           title: "Sign Out",
           sub_title: "Sign Out",
           icon: "fe:logout",
-          url: "/sign-in",
           hasChildren: false,
+          isLink: false,
           parent: "sign-out",
         },
       ],

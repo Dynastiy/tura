@@ -88,7 +88,46 @@ export default {
 
   methods: {
     goToLink(item) {
-      this.$router.push(item.url).catch(() => {});
+      if(item.parent === 'sign-out') {
+        this.logout()
+      }
+      else {
+        this.$router.push(item.url).catch(() => {});
+      }
+    },
+
+    logout() {
+      this.$swal
+        .fire({
+          title: "Uhhhh! 😔",
+          text: "Are you sure you want to log out?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, logout!",
+        })
+        .then((result) => {
+          console.log(result, "kkk");
+          if (result.isConfirmed) {
+            this.userLogout();
+          }
+        });
+    },
+
+    userLogout() {
+      this.$store.dispatch("auth/logout");
+      this.$swal
+        .fire({
+          title: "Woo hoo 😫",
+          text: "Logged out succesfully",
+          icon: "success",
+          confirmButtonText: "Ok!",
+        })
+        .then((result) => {
+          console.log(result, "kkk");
+          if (result.isConfirmed) {
+            this.$router.go();
+          }
+        });
     },
     //   openSubMenu(item) {
     //     let value = this.subMenu === item.id ? null : item.id;
