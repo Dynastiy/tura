@@ -157,7 +157,7 @@ export default {
     getUserMeta({ commit }, payload) {
       axios
         .get(
-          `https://goodymarketplace.com/tura/wp-json/nellalink/v1/smart-meta-manager/user?user_id=${payload}&meta_key=nll_user_email_address_verified,phone_number,rimplenet_referrer_sponsor,registered_as_community_member`
+          `https://backend.turaai.com/wp-json/nellalink/v1/smart-meta-manager/user?user_id=${payload}&meta_key=nll_user_email_address_verified,phone_number,rimplenet_referrer_sponsor,registered_as_community_member`
         )
         .then((res) => {
           commit("SET_USER_META", res.data.data);

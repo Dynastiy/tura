@@ -139,6 +139,7 @@ export default {
   },
   beforeMount() {
     this.$store.dispatch("auth/generateWalletAddress", this.user.user_id);
+    this.$store.dispatch("auth/getUserMeta", this.user.user_id)
   },
   
   computed: {

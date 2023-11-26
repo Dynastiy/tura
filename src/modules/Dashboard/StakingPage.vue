@@ -218,7 +218,7 @@
           .then((res) => {
             console.log(res);
             this.loading = false;
-            var responsePayload = res.data;
+            var responsePayload = res;
             this.$toast.open({
               message: `${responsePayload.message}`,
               type: "success",
@@ -230,10 +230,10 @@
             return res;
           })
           .catch((err) => {
-            console.log(err);
-            this.loading = false;
-            var responsePayload = err.response.data;
-            console.log(responsePayload);
+            // console.log(err);
+            var responsePayload = err.data;
+            this.loading = false
+            console.log(responsePayload, "ommmo");
             this.$toast.open({
               message: `${responsePayload.message}`,
               type: "error",
@@ -247,7 +247,7 @@
       getBalances() {
       this.loading = true;
       this.appDomain
-        .getWallets(this.user.user_id, "usdt, usdt_locked")
+        .getWallets(this.user.user_id, "usdt,usdt_locked")
         .then((res) => {
           console.log(res);
           this.balances = res.data;
