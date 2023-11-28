@@ -62,48 +62,51 @@
         direction="rtl"
         size="80%"
       >
-        <div class="tw-mt-8">
-          <div class="text-center">
-            <span
-              class="tw-mb-3 user-icon tw-h-[60px] tw-mx-auto tw-bg-gray4 tw-w-[60px] tw-rounded-[50%] tw-flex align-items-center tw-justify-center"
-            >
-              <i-icon icon="gridicons:user" width="80px" />
-            </span>
-            <h5 class="tw-mb-0 tw-font-bold tw-text-md tw-capitalize">
-              {{ user.username }}
-            </h5>
-            <span class="tw-text-xs">{{ user.user_email }}</span>
-          </div>
-          <ul class="tw-p-0 tw-flex tw-flex-col tw-gap-2 tw-mt-4">
-            <li v-for="item in menu" :key="item.id">
-              <div class="menu-item tw-px-3">
-                <span
-                  class="menu-item-link"
-                  :role="item.header ? '' : 'button'"
-                  @click="item.hasChildren ? openSubMenu(item) : goToLink(item)"
-                  :class="{ 'active-link': item.parent === routeParent }"
-                >
-                  <div class="d-flex align-items-center" style="gap: 10px">
-                    <i-icon
-                      :icon="item.icon"
-                      v-if="item.icon"
-                      class="menu-item-icon"
-                    />
-                    <span class="tw-flex flex-column">
-                      <span
-                        class="tw-text-sm"
-                        :class="
-                          item.header ? 'menu-title-header' : 'menu-title'
-                        "
-                      >
-                        {{ item.title }}
-                      </span>
-                      <!-- <span class="tw-text-xs tw-text-gray4">
+        <div class=" tw-h-screen tw-flex tw-flex-col tw-justify-between">
+          <div class="tw-mt-8">
+            <div class="text-center">
+              <span
+                class="tw-mb-3 user-icon tw-h-[60px] tw-mx-auto tw-bg-gray4 tw-w-[60px] tw-rounded-[50%] tw-flex align-items-center tw-justify-center"
+              >
+                <i-icon icon="gridicons:user" width="80px" />
+              </span>
+              <h5 class="tw-mb-0 tw-font-bold tw-text-md tw-capitalize">
+                {{ user.username }}
+              </h5>
+              <span class="tw-text-xs">{{ user.user_email }}</span>
+            </div>
+            <ul class="tw-p-0 tw-flex tw-flex-col tw-gap-2 tw-mt-4">
+              <li v-for="item in menu" :key="item.id">
+                <div class="menu-item tw-px-3">
+                  <span
+                    class="menu-item-link"
+                    :role="item.header ? '' : 'button'"
+                    @click="
+                      item.hasChildren ? openSubMenu(item) : goToLink(item)
+                    "
+                    :class="{ 'active-link': item.parent === routeParent }"
+                  >
+                    <div class="d-flex align-items-center" style="gap: 10px">
+                      <i-icon
+                        :icon="item.icon"
+                        v-if="item.icon"
+                        class="menu-item-icon"
+                      />
+                      <span class="tw-flex flex-column">
+                        <span
+                          class="tw-text-sm"
+                          :class="
+                            item.header ? 'menu-title-header' : 'menu-title'
+                          "
+                        >
+                          {{ item.title }}
+                        </span>
+                        <!-- <span class="tw-text-xs tw-text-gray4">
                       {{ item.sub_title }}
                     </span> -->
-                    </span>
-                  </div>
-                  <!-- <span v-if="item.hasChildren">
+                      </span>
+                    </div>
+                    <!-- <span v-if="item.hasChildren">
                   <i-icon
                     :icon="
                       subMenu === item.id ? 'prime:angle-down' : 'prime:angle-right'
@@ -111,10 +114,34 @@
                     width="30px"
                   />
                 </span> -->
-                </span>
-              </div>
-            </li>
-          </ul>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="tw-flex tw-gap-1 tw-justify-center tw-pb-8">
+            <a
+              href="https://turaai.com"
+              class="tw-flex tw-items-center tw-text-xs tw-gap-1 tw-font-semibold tw-text-primary tw-no-underline"
+              target="_blank"
+            >
+              <span>Website</span>
+              <span>
+                <i-icon icon="lucide:external-link" />
+              </span>
+            </a>
+            <el-divider direction="vertical"></el-divider>
+            <a
+              href="https://t.me/turaAI"
+              class="tw-flex tw-items-center tw-text-xs tw-gap-1 tw-font-semibold tw-text-primary tw-no-underline"
+              target="_blank"
+            >
+              <span>Join Telegram</span>
+              <span>
+                <i-icon icon="lucide:external-link" />
+              </span>
+            </a>
+          </div>
         </div>
       </el-drawer>
     </div>

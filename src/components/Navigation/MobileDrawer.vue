@@ -1,7 +1,7 @@
 <template>
-  <div id="app-drawer" class="tw-bg-gray7 tw-pt-6">
+  <div id="app-drawer" class="tw-bg-gray7 tw-h-screen tw-flex tw-flex-col tw-justify-between tw-pt-6">
     <div>
-      <slot></slot>
+      <div>
     </div>
     <div class="text-center tw-mb-4">
       <div class="text-center">
@@ -68,6 +68,9 @@
         <hr class="my-2">
       </li>
     </ul>
+    </div>
+
+    
   </div>
 </template>
 

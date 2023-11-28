@@ -1,7 +1,7 @@
 <template>
   <div
     id="app-drawer"
-    class=" tw-bg-white tw-pt-6 tw-pb-24 lg:tw-z-2 md:tw-z-2 lg:tw-fixed tw-shadow-lg md:tw-fixed tw-absolute lg:tw-left-0 md:tw-left-0 tw-top-22 tw-h-screen tw-overflow-auto tw-w-[250px]"
+    class=" tw-bg-white tw-pt-6 tw-pb-24 lg:tw-z-2 md:tw-z-2 lg:tw-fixed tw-shadow-lg md:tw-fixed tw-absolute lg:tw-left-0 md:tw-left-0 tw-top-22 tw-h-screen tw-flex tw-flex-col tw-justify-between tw-overflow-auto tw-w-[250px]"
   >
     <!-- <div>
       {{ userMeta }}
@@ -34,6 +34,22 @@
         </div>
       </li>
     </ul>
+
+    <div class="tw-flex tw-gap-1 tw-justify-center tw-pb-8">
+      <a href="https://turaai.com" class="tw-flex tw-items-center tw-text-xs tw-gap-1 tw-font-semibold tw-text-primary tw-no-underline" target="_blank">
+        <span>Website</span>
+        <span>
+          <i-icon icon="lucide:external-link" />
+        </span>
+      </a>
+      <el-divider direction="vertical"></el-divider>
+      <a href="https://t.me/turaAI" class="tw-flex tw-items-center tw-text-xs tw-gap-1 tw-font-semibold tw-text-primary tw-no-underline" target="_blank">
+        <span>Join Telegram</span>
+        <span>
+          <i-icon icon="lucide:external-link" />
+        </span>
+      </a>
+    </div>
   </div>
 </template>
 
