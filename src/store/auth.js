@@ -110,7 +110,7 @@ export default {
         let res = await $request.post(`users/login`, payload);
         let responsePayload = res.data;
         console.log(responsePayload);
-        localStorage.setItem("tura_token", responsePayload.access_token);
+        localStorage.setItem("tura_token", responsePayload.data.access_token);
         Vue.$toast.open({
           message: `${responsePayload.message}`,
           type: "success",

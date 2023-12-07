@@ -249,7 +249,7 @@ export default {
       this.appDomain
         .getWallets(
           this.user.user_id,
-          "usdt, usdt_interest, usdt_referral_bonus"
+          "usdt,usdt_interest,usdt_referral_bonus"
         )
         .then((res) => {
           console.log(res);
@@ -258,7 +258,7 @@ export default {
           let resPayload = resData.find((item) => item.wallet_id === "usdt");
           this.wallet = resPayload;
           this.loading = false;
-          this.swapRate;
+          this.swapRate();
         })
         .catch((err) => {
           this.loading = false;
@@ -287,13 +287,10 @@ export default {
         from: this.selected.wallet_id,
         to: this.selected2.wallet_id,
       };
-      this.$request
-        .get(
-          `${process.env.VUE_APP_MIDDLEWARE_API_URL}conversion-rate?from=${data.from}&to=${data.to}`
-        )
+      this.middleware.getStakeRate(data)
         .then((res) => {
           console.log(res, "ommo");
-          let resPayload = res.data.data;
+          let resPayload = res.data;
           this.rate = resPayload.rate;
           this.swapAmount = this.rate * this.amount;
           return res;
@@ -316,12 +313,13 @@ export default {
         amount_to_swap: this.amount,
         request_id: this.requestId,
       };
-      this.$axios
-        .post(`${process.env.VUE_APP_MIDDLEWARE_API_URL}swap`, formData)
+      this.middleware.swap(formData)
+      // this.$axios
+      //   .post(`${process.env.VUE_APP_MIDDLEWARE_API_URL}swap`, formData)
         .then((res) => {
           console.log(res);
           this.busy = false;
-          var responsePayload = res.data;
+          var responsePayload = res;
           this.$toast.open({
             message: `${responsePayload.message}`,
             type: "success",
@@ -335,7 +333,7 @@ export default {
         .catch((err) => {
           console.log(err);
           this.busy = false;
-          var responsePayload = err.response.data;
+          var responsePayload = err.data;
           console.log(responsePayload);
           this.$toast.open({
             message: `${responsePayload.message}`,
@@ -359,7 +357,7 @@ export default {
   beforeMount() {
     this.getBalances();
     var result = Math.round(+new Date() / 1000);
-    this.requestId = `staking_${result}`;
+    this.requestId = `${result}`;
   },
 
   computed: {
@@ -379,46 +377,9 @@ export default {
 
     selected2() {
       var selectedValue = {};
-      if (!this.isSelected2) {
-        selectedValue = this.filteredWallets[0];
-      } else {
-        selectedValue = this.selectedWallet2;
-      }
+      selectedValue = this.wallet;
       return selectedValue;
     },
-
-    // filteredWallets() {
-    //   if (this.selected.wallet_id === "usdt") {
-    //     var value = this.wallets.filter((item) => item.wallet_id === "szcb");
-    //   } else if (this.selected.wallet_id === "usdt_referral_bonus") {
-    //     value = this.wallets.filter(
-    //       (item) => item.wallet_id === "szcb" || item.wallet_id === "usdt"
-    //     );
-    //   } else if (this.selected.wallet_id === "szcb_referral_bonus") {
-    //     value = this.wallets.filter((item) => item.wallet_id === "szcb");
-    //   } else if (this.selected.wallet_id === "usdt_interest") {
-    //     value = this.wallets.filter(
-    //       (item) => item.wallet_id === "szcb" || item.wallet_id === "usdt"
-    //     );
-    //   }
-    //   return value;
-    // },
-
-    // filteredWallets() {
-    //   let selectedValue = {};
-    //   if (this.selected) {
-    //     var value = this.wallets.filter(
-    //       (item) => item.wallet_id !== this.selected.wallet_id
-    //     );
-    //     selectedValue = value;
-    //   }
-    //   return selectedValue;
-    // },
-
-    // filteredWalletsFrom() {
-    //   var value = this.wallets.filter((item) => item.wallet_id !== "szcb");
-    //   return value;
-    // },
   },
 };
 </script>

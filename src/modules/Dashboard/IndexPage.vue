@@ -260,6 +260,8 @@ export default {
 
     closeModal() {
       this.action = null;
+      this.getBalances();
+      this.getStakingBalances();
     },
   },
 

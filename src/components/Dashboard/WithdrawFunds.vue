@@ -247,12 +247,45 @@ export default {
         .then((res) => {
           console.log(res);
           this.balances = res.data;
-          this.wallet = res.data[0]
+          this.wallet = res.data[0];
           this.loading = false;
         })
         .catch((err) => {
           this.loading = false;
           console.log(err);
+        });
+    },
+
+    withdraw() {
+      this.loading = true;
+      const payload = {
+        currencySymbol: "USDT",
+        appUserId: this.user.user_id,
+        amount: this.amount,
+        walletAddress: this.address_to,
+      };
+      this.withdrawal
+        .requestWithdrawal(payload)
+        .then((res) => {
+          console.log(res);
+          this.getBalances();
+          this.$toast.open({
+          message: `Error!`,
+          type: "success",
+          position: "top",
+          // all of other options may go here
+        });
+          this.loading = false;
+        })
+        .catch((err) => {
+          this.loading = false;
+          console.log(err);
+          this.$toast.open({
+          message: `${err.data.message}`,
+          type: "error",
+          position: "top",
+          // all of other options may go here
+        });
         });
     },
   },
@@ -262,14 +295,14 @@ export default {
       return this.$store.getters["auth/getUser"];
     },
     wallet_address() {
-      return this.$store.getters['auth/getWalletAddress']
+      return this.$store.getters["auth/getWalletAddress"];
       // return "xtheyushih2it57375";
     },
   },
 
   beforeMount() {
     // this.generateWalletAddress();
-    this.getBalances()
+    this.getBalances();
   },
 };
 </script>
