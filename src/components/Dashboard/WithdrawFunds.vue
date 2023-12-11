@@ -5,9 +5,11 @@
     </template>
     <template #body>
       <div class="">
-      <div>
-        <h6 class="tw-text-white tw-text-sm tw-text-right tw-underline">* Minimum Withdrawal: $5</h6>
-      </div>
+        <div class="tw-flex tw-flex tw-justify-end">
+          <h6 class="tw-text-white tw-bg-red-600 tw-w-fit tw-px-2 tw-py-1 tw-rounded-xl tw-text-xs">
+            * Minimum Withdrawal: $5
+          </h6>
+        </div>
         <validation-observer v-slot="{ invalid, handleSubmit }">
           <form @submit.prevent="handleSubmit(withdraw)">
             <validation-provider
@@ -227,23 +229,23 @@ export default {
         .then((res) => {
           console.log(res);
           this.getBalances();
+          var responsePayload = res.data;
           this.$toast.open({
-          message: `Error!`,
-          type: "success",
-          position: "top",
-          // all of other options may go here
-        });
+            message: `${responsePayload.message}`,
+            type: "success",
+            position: "top",
+          });
           this.loading = false;
         })
         .catch((err) => {
           this.loading = false;
           console.log(err);
           this.$toast.open({
-          message: `${err.data.message}`,
-          type: "error",
-          position: "top",
-          // all of other options may go here
-        });
+            message: `${err.data.message}`,
+            type: "error",
+            position: "top",
+            // all of other options may go here
+          });
         });
     },
   },
@@ -262,12 +264,11 @@ export default {
     // this.generateWalletAddress();
     this.getBalances();
   },
-  
-    mounted() {
+
+  mounted() {
     var result = Math.round(+new Date() / 1000);
     this.requestId = `${result}`;
   },
-
 };
 </script>
 
