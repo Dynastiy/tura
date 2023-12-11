@@ -5,6 +5,9 @@
     </template>
     <template #body>
       <div class="">
+      <div>
+        <h6 class="tw-text-white tw-text-sm tw-text-right tw-underline">* Minimum Withdrawal: $5</h6>
+      </div>
         <validation-observer v-slot="{ invalid, handleSubmit }">
           <form @submit.prevent="handleSubmit(withdraw)">
             <validation-provider
@@ -150,52 +153,6 @@ export default {
       },
       currencies: ["USDT", "RAAF"],
       loading: false,
-      // wallet: {
-      //   wallet_id: "raaf",
-      //   wallet_balance_raw: 0,
-      //   wallet_balance_formatted: "RAAF0.000000000",
-      //   wallet_name: "RAAF",
-      //   wallet_symbol: "RAAF",
-      //   wallet_symbol_position: "left",
-      //   wallet_decimal: "9",
-      //   wallet_note: "RAAF",
-      //   wallet_type: "crypto",
-      // },
-      // balances: [
-      // {
-      //       "wallet_id": "raaf",
-      //       "wallet_balance_raw": 0,
-      //       "wallet_balance_formatted": "RAAF0.000000000",
-      //       "wallet_name": "RAAF",
-      //       "wallet_symbol": "RAAF",
-      //       "wallet_symbol_position": "left",
-      //       "wallet_decimal": "9",
-      //       "wallet_note": "RAAF",
-      //       "wallet_type": "crypto"
-      //   },
-      //   {
-      //       "wallet_id": "ngn",
-      //       "wallet_balance_raw": 0,
-      //       "wallet_balance_formatted": "\u20a60.00",
-      //       "wallet_name": "ngn",
-      //       "wallet_symbol": "\u20a6",
-      //       "wallet_symbol_position": "left",
-      //       "wallet_decimal": "2",
-      //       "wallet_note": "Nigerian Naira",
-      //       "wallet_type": "fiat"
-      //   },
-      //   {
-      //       "wallet_id": "raaf",
-      //       "wallet_balance_raw": 0,
-      //       "wallet_balance_formatted": "RAAF0.000000000",
-      //       "wallet_name": "RAAF",
-      //       "wallet_symbol": "RAAF",
-      //       "wallet_symbol_position": "left",
-      //       "wallet_decimal": "9",
-      //       "wallet_note": "RAAF",
-      //       "wallet_type": "crypto"
-      //   },
-      // ],
       address_to: "",
       amount: null,
       requestId: "",
@@ -263,6 +220,7 @@ export default {
         appUserId: this.user.user_id,
         amount: this.amount,
         walletAddress: this.address_to,
+        requestId: this.requestId,
       };
       this.withdrawal
         .requestWithdrawal(payload)
@@ -304,6 +262,12 @@ export default {
     // this.generateWalletAddress();
     this.getBalances();
   },
+  
+    mounted() {
+    var result = Math.round(+new Date() / 1000);
+    this.requestId = `${result}`;
+  },
+
 };
 </script>
 

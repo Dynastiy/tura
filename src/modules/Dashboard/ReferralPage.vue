@@ -4,7 +4,7 @@
       <h5 class="tw-text-md tw-font-semibold">Referral Bonus Balances</h5>
       <b-skeleton-wrapper :loading="loading">
         <template #loading>
-          <div class=" tw-mt-4">
+          <div class="tw-mt-4">
             <div
               class="lg:tw-w-2/5 md:tw-w-2/5 tw-w-full tw-bg-gray6 tw-rounded-lg tw-p-4"
             >
@@ -46,8 +46,14 @@
     </div>
     <h6 class="tw-text-center tw-my-4">
       You are entitled to earn
-      <b>10%</b> on the first deposit of the person you referred. Your referral link is shown below:
+      <b>10%</b> on the first deposit of the person you referred. Your referral
+      link is shown below:
     </h6>
+    <h6 class="tw-text-center tw-my-4">
+      A rebate of <b>$500</b> bonus is paid for every <b>50</b> active
+      downlines.
+    </h6>
+    <h6  class="tw-text-center tw-my-4">A <b>1000</b> active downline activates a <b>$5000</b> Crypto grant</h6>
     <div class="tw-flex tw-justify-center">
       <div
         class="tw-flex align-items-center tw-px-3 tw-py-3 tw-space-x-2 tw-bg-gray6 tw-w-fit tw-rounded-lg"
