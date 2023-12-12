@@ -168,7 +168,7 @@ export default {
         let timeSpan = 60 * 45;
         if (distance > timeSpan) {
           clearInterval(x);
-          alert("Logged out");
+          alert("Your session has expired, you will be automatically logged out");
           localStorage.removeItem("tura_token");
           localStorage.clear();
           location.reload()
