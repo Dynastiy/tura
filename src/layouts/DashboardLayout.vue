@@ -168,7 +168,7 @@ export default {
         console.log(distance, "ommmo");
 
         // If the count down is over, write some text
-        let timeSpan = 60 * 1;
+        let timeSpan = 60 * 45;
         if (distance > timeSpan) {
           clearInterval(x);
           alert("Logged out");
