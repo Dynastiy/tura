@@ -139,13 +139,58 @@ export default {
           parent: "sign-out",
         },
       ],
+      loggedInAt: null,
+      timeFrame: 10,
     };
   },
+
+  methods: {
+    checkLoggedIn() {
+      // Set the date we're counting down from
+
+      var countDownDate = this.user.time_of_login;
+
+      // Update the count down every 1 second
+      var x = setInterval(function () {
+        // Get today's date and time
+        var now = new Date().getTime();
+        const unixTimestamp = Math.floor(now / 1000);
+        console.log(unixTimestamp);
+        // console.log(now, "5wewoooouyuyy"); 
+
+        // console.log(countDownDate, 'helllo');
+
+        // console.log(this.$store.state["auth/loggedInAt"], 'ommmo');
+
+        // Find the distance between now and the count down date
+        var distance = unixTimestamp - countDownDate;
+
+        console.log(distance, "ommmo");
+
+        // If the count down is over, write some text
+        let timeSpan = 60 * 1;
+        if (distance > timeSpan) {
+          clearInterval(x);
+          alert("Logged out");
+          localStorage.removeItem("tura_token");
+          localStorage.clear();
+          location.reload()
+        }
+        // console.log(x);
+        return x;
+      }, 1000);
+    },
+  },
+
   beforeMount() {
     this.$store.dispatch("auth/generateWalletAddress", this.user.user_id);
-    this.$store.dispatch("auth/getUserMeta", this.user.user_id)
+    this.$store.dispatch("auth/getUserMeta", this.user.user_id);
   },
-  
+
+  mounted() {
+    this.checkLoggedIn();
+  },
+
   computed: {
     routeParent() {
       return this.$route.meta.header;

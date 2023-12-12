@@ -21,6 +21,7 @@ const getDefaultState = () => {
     userMeta: {},
     wallet_address: {},
     loggedIn: false,
+    loggedInAt: null
   };
 };
 
@@ -30,6 +31,7 @@ export default {
   getters: {
     isLoading: (state) => state.loading,
     getUser: (state) => state.user,
+    getLoggedInAt: (state) => state.loggedInAt,
     getUserMeta: (state) => state.userMeta,
     getWalletAddress: (state) => state.wallet_address,
   },
@@ -81,6 +83,10 @@ export default {
       state.user = payload;
     },
 
+    SET_LOGIN_TIME(state, payload) {
+      state.loggedInAt = payload;
+    },
+
     SET_USER_META(state, payload) {
       state.userMeta = payload;
     },
@@ -92,7 +98,7 @@ export default {
     async LOGOUT(state) {
       state.user = null;
       state.token = null;
-      localStorage.removeItem("token");
+      localStorage.removeItem("tura_token");
       localStorage.clear();
     },
     
@@ -120,6 +126,10 @@ export default {
         commit("LOGIN", {
           accessToken: responsePayload.access_token,
         });
+        let time = new Date().toString()
+        // let time = new Date()
+        console.log(time);
+        commit("SET_LOGIN_TIME", time)
         commit("SET_USER", responsePayload.data);
         // Check redirect URL
         const url = window.location.search;
