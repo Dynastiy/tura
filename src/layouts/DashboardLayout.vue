@@ -155,7 +155,6 @@ export default {
         // Get today's date and time
         var now = new Date().getTime();
         const unixTimestamp = Math.floor(now / 1000);
-        console.log(unixTimestamp);
         // console.log(now, "5wewoooouyuyy"); 
 
         // console.log(countDownDate, 'helllo');
@@ -164,8 +163,6 @@ export default {
 
         // Find the distance between now and the count down date
         var distance = unixTimestamp - countDownDate;
-
-        console.log(distance, "ommmo");
 
         // If the count down is over, write some text
         let timeSpan = 60 * 45;

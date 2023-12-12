@@ -5,7 +5,7 @@
     </template>
     <template #body>
       <div class="">
-        <div class="tw-flex tw-flex tw-justify-end">
+        <div class="tw-flex tw-flex tw-justify-end tw-mb-2">
           <h6 class="tw-text-white tw-bg-red-600 tw-w-fit tw-px-2 tw-py-1 tw-rounded-xl tw-text-xs">
             * Minimum Withdrawal: $5
           </h6>
