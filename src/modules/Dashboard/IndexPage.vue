@@ -58,9 +58,7 @@
               <span class="tw-flex align-items-center tw-space-x-1">
                 <h4 class="tw-font-bold tw-text-white tw-text-[25px] tw-mb-0">
                   {{
-                    viewAmount
-                      ? wallet.wallet_balance_raw + " USDT"
-                      : "****"
+                    viewAmount ? wallet.wallet_balance_raw + " USDT" : "****"
                   }}
                 </h4>
                 <span role="button" @click="viewAmount = !viewAmount">
@@ -142,8 +140,33 @@
       </div>
     </div>
 
-    <!-- Wallet Actions Modals  -->
+    <!-- Download App -->
+    <div class="tw-mt-4 tw-bg-white tw-p-6">
+      <h5 class="tw-font-bold tw-text-center">Download Our Andriod App</h5>
+      <hr class="tw-my-2">
+      <div class="tw-flex lg:tw-flex-row md:tw-flex-row tw-flex-col tw-justify-center tw-gap-4 tw-items-center">
+        <button class="primary-btn">
+          <a href="https://turaai.com/app.apk" target="_blank" class="tw-text-white tw-no-underline">
+            Click to Download
+          </a>
+        </button>
+        <h4 class="tw-font-bold">OR</h4>
+        <div class="tw-text-center">
+          <v-qr
+            text="https://turaai.com/app.apk"
+            class="tw-bg-gray4 tw-border tw-border-primary tw-rounded-xl"
+            :width="140"
+          />
+          <span
+            class="tw-bg-primary tw-mx-auto tw-block tw-px-3 tw-rounded-[4px] tw-w-max tw-py-1 tw-text-xs tw-text-white"
+            >Scan code to download</span
+          >
+        </div>
+        
+      </div>
+    </div>
 
+    <!-- Wallet Actions Modals  -->
     <!-- Deposit Funds -->
     <deposit-funds v-if="action === 'deposit'" @close="closeModal" />
 

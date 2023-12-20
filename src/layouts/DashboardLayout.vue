@@ -152,14 +152,10 @@ export default {
 
       // Update the count down every 1 second
       var x = setInterval(function () {
+        
         // Get today's date and time
         var now = new Date().getTime();
         const unixTimestamp = Math.floor(now / 1000);
-        // console.log(now, "5wewoooouyuyy"); 
-
-        // console.log(countDownDate, 'helllo');
-
-        // console.log(this.$store.state["auth/loggedInAt"], 'ommmo');
 
         // Find the distance between now and the count down date
         var distance = unixTimestamp - countDownDate;
@@ -173,7 +169,6 @@ export default {
           localStorage.clear();
           location.reload()
         }
-        // console.log(x);
         return x;
       }, 1000);
     },
