@@ -225,25 +225,6 @@ export default {
   },
 
   methods: {
-    // getBalances() {
-    //   this.loading = true;
-    //   this.$request
-    //     .get(
-    //       `user-wallet-balance/multi?wallet_id=rngn,raaf,ngn&formatted=yes&user_id=${this.user.user_id}`
-    //     )
-    //     .then((res) => {
-    //       console.log(res);
-    //       this.wallets = res.data.data;
-    //       this.swapRate();
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     })
-    //     .finally(() => {
-    //       this.loading = false;
-    //     });
-    // },
-
     getBalances() {
       this.loading = true;
       this.appDomain
@@ -384,8 +365,10 @@ export default {
 };
 </script>
 
-<style scoepd>
+<style scoped>
+
 .input-amount {
   border: 0 !important;
 }
+
 </style>

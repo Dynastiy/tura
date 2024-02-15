@@ -70,9 +70,9 @@
                 </span>
               </span>
             </div>
-            <div>
+            <!-- <div>
               <img src="@/assets/img/wallet.svg" width="100" alt="" />
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="tw-w-full tw-flex tw-gap-3">
@@ -142,7 +142,7 @@
 
     <!-- Download App -->
     <div class="tw-mt-4 tw-bg-white tw-p-6">
-      <h5 class="tw-font-bold tw-text-center">Download Our Andriod App</h5>
+      <h5 class="tw-font-bold tw-text-center">Download Our Android App</h5>
       <hr class="tw-my-2">
       <div class="tw-flex lg:tw-flex-row md:tw-flex-row tw-flex-col tw-justify-center tw-gap-4 tw-items-center">
         <button class="primary-btn">

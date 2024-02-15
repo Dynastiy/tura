@@ -94,13 +94,6 @@ export default {
     SET_WALLET_ADDRESS(state, payload) {
       state.wallet_address = payload;
     },
-
-    async LOGOUT(state) {
-      state.user = null;
-      state.token = null;
-      localStorage.removeItem("tura_token");
-      localStorage.clear();
-    },
     
     RESET(state) {
       Object.keys(state).forEach((key) => {
