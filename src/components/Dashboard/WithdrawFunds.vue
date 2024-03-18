@@ -216,37 +216,44 @@ export default {
     },
 
     withdraw() {
-      this.loading = true;
-      const payload = {
-        currencySymbol: "USDT",
-        appUserId: this.user.user_id,
-        amount: this.amount,
-        walletAddress: this.address_to,
-        requestId: this.requestId,
-      };
-      this.withdrawal
-        .requestWithdrawal(payload)
-        .then((res) => {
-          console.log(res);
-          this.getBalances();
-          var responsePayload = res.data;
-          this.$toast.open({
-            message: `${responsePayload.message}`,
-            type: "success",
-            position: "top",
-          });
-          this.loading = false;
+      this.$swal
+        .fire({
+          title: "Oh oh 😫",
+          text: "Withdrawal Module revamp ongoing, you will be notified when its revamp is complete!",
+          icon: "error",
+          confirmButtonText: "Ok!",
         })
-        .catch((err) => {
-          this.loading = false;
-          console.log(err);
-          this.$toast.open({
-            message: `${err.data.message}`,
-            type: "error",
-            position: "top",
-            // all of other options may go here
-          });
-        });
+      // this.loading = true;
+      // const payload = {
+      //   currencySymbol: "USDT",
+      //   appUserId: this.user.user_id,
+      //   amount: this.amount,
+      //   walletAddress: this.address_to,
+      //   requestId: this.requestId,
+      // };
+      // this.withdrawal
+      //   .requestWithdrawal(payload)
+      //   .then((res) => {
+      //     console.log(res);
+      //     this.getBalances();
+      //     var responsePayload = res.data;
+      //     this.$toast.open({
+      //       message: `${responsePayload.message}`,
+      //       type: "success",
+      //       position: "top",
+      //     });
+      //     this.loading = false;
+      //   })
+      //   .catch((err) => {
+      //     this.loading = false;
+      //     console.log(err);
+      //     this.$toast.open({
+      //       message: `${err.data.message}`,
+      //       type: "error",
+      //       position: "top",
+      //       // all of other options may go here
+      //     });
+      //   });
     },
   },
 

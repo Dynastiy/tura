@@ -1,19 +1,5 @@
 <template>
   <div>
-    <!-- <div class="">
-     <div class="tw-flex tw-gap-2">
-      <span
-        class="user-icon tw-h-[60px] tw-bg-gray4 tw-w-[60px] tw-rounded-[50%] tw-flex align-items-center tw-justify-center"
-      >
-        <i-icon icon="gridicons:user" width="80px" />
-      </span>
-      <h5 class="tw-mb-0 tw-font-bold tw-text-md tw-capitalize">
-        {{ user.username }}
-      </h5>
-     </div>
-      <span class="tw-text-xs">{{ user.user_email }}</span>
-    </div> -->
-    <!-- Wallets  -->
     <b-skeleton-wrapper :loading="loading">
       <template #loading>
         <div class="tw-flex lg:tw-flex-row md:tw-flex-row tw-flex-col tw-gap-3">
@@ -70,9 +56,6 @@
                 </span>
               </span>
             </div>
-            <!-- <div>
-              <img src="@/assets/img/wallet.svg" width="100" alt="" />
-            </div> -->
           </div>
         </div>
         <div class="tw-w-full tw-flex tw-gap-3">
@@ -93,9 +76,6 @@
                 >
                   {{ item.wallet_balance_raw }}
                 </h4>
-                <!-- <span class="tw-text-white tw-">
-                {{ item.wallet_symbol }}
-              </span> -->
               </span>
             </div>
           </div>
@@ -143,10 +123,16 @@
     <!-- Download App -->
     <div class="tw-mt-4 tw-bg-white tw-p-6">
       <h5 class="tw-font-bold tw-text-center">Download Our Android App</h5>
-      <hr class="tw-my-2">
-      <div class="tw-flex lg:tw-flex-row md:tw-flex-row tw-flex-col tw-justify-center tw-gap-4 tw-items-center">
+      <hr class="tw-my-2" />
+      <div
+        class="tw-flex lg:tw-flex-row md:tw-flex-row tw-flex-col tw-justify-center tw-gap-4 tw-items-center"
+      >
         <button class="primary-btn">
-          <a href="https://turaai.com/app.apk" target="_blank" class="tw-text-white tw-no-underline">
+          <a
+            href="https://turaai.com/app.apk"
+            target="_blank"
+            class="tw-text-white tw-no-underline"
+          >
             Click to Download
           </a>
         </button>
@@ -162,7 +148,6 @@
             >Scan code to download</span
           >
         </div>
-        
       </div>
     </div>
 
