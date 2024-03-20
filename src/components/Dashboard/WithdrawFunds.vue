@@ -202,7 +202,7 @@ export default {
     getBalances() {
       this.loading = true;
       this.appDomain
-        .getWallets(this.user.user_id, "usdt")
+        .getWallets(this.user.user_id, "tusd")
         .then((res) => {
           console.log(res);
           this.balances = res.data;
@@ -216,44 +216,44 @@ export default {
     },
 
     withdraw() {
-      this.$swal
-        .fire({
-          title: "Oh oh 😫",
-          text: "Withdrawal Module revamp ongoing, you will be notified when its revamp is complete!",
-          icon: "error",
-          confirmButtonText: "Ok!",
-        })
-      // this.loading = true;
-      // const payload = {
-      //   currencySymbol: "USDT",
-      //   appUserId: this.user.user_id,
-      //   amount: this.amount,
-      //   walletAddress: this.address_to,
-      //   requestId: this.requestId,
-      // };
-      // this.withdrawal
-      //   .requestWithdrawal(payload)
-      //   .then((res) => {
-      //     console.log(res);
-      //     this.getBalances();
-      //     var responsePayload = res.data;
-      //     this.$toast.open({
-      //       message: `${responsePayload.message}`,
-      //       type: "success",
-      //       position: "top",
-      //     });
-      //     this.loading = false;
+      // this.$swal
+      //   .fire({
+      //     title: "Oh oh 😫",
+      //     text: "Withdrawal Module revamp ongoing, you will be notified when its revamp is complete!",
+      //     icon: "error",
+      //     confirmButtonText: "Ok!",
       //   })
-      //   .catch((err) => {
-      //     this.loading = false;
-      //     console.log(err);
-      //     this.$toast.open({
-      //       message: `${err.data.message}`,
-      //       type: "error",
-      //       position: "top",
-      //       // all of other options may go here
-      //     });
-      //   });
+      this.loading = true;
+      const payload = {
+        wallet_id: "tusd",
+        user_id: this.user.user_id,
+        withdrawal_amount: this.amount,
+        withdrawal_address_to: this.address_to,
+        request_id: this.requestId,
+      };
+      this.withdrawal
+        .requestWithdrawal(payload)
+        .then((res) => {
+          console.log(res);
+          this.getBalances();
+          var responsePayload = res.data;
+          this.$toast.open({
+            message: `${responsePayload.message}`,
+            type: "success",
+            position: "top",
+          });
+          this.loading = false;
+        })
+        .catch((err) => {
+          this.loading = false;
+          console.log(err);
+          this.$toast.open({
+            message: `${err.data.message}`,
+            type: "error",
+            position: "top",
+            // all of other options may go here
+          });
+        });
     },
   },
 
@@ -263,12 +263,10 @@ export default {
     },
     wallet_address() {
       return this.$store.getters["auth/getWalletAddress"];
-      // return "xtheyushih2it57375";
     },
   },
 
   beforeMount() {
-    // this.generateWalletAddress();
     this.getBalances();
   },
 

@@ -1,21 +1,22 @@
-import $request from "@/https/middleware";
+import $request from "axios";
+const baseURL = "https://middleware-flash.samzugagpt.com/"
 
 const middleware = {
  
 
    // stake
    async stake(formData) {
-    return $request.post("stake", formData).then((response) => response.data)
+    return $request.post(baseURL+"stake", formData).then((response) => response.data)
   },
 
    // Swap
    async swap(formData) {
-    return $request.post("swap", formData).then((response) => response.data)
+    return $request.post(baseURL+"swap", formData).then((response) => response.data)
   },
 
   // Swap Rate
   async getStakeRate(payload) {
-    return $request.get(`conversion-rate?from=${payload.from}&to=${payload.to}`).then((response) => response.data)
+    return $request.get(`${baseURL}conversion-rate?from=${payload.from}&to=${payload.to}`).then((response) => response.data)
   }
 
   

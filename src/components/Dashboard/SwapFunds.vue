@@ -27,12 +27,9 @@
                   <div class="">
                     <el-dropdown trigger="click">
                       <span class="el-dropdown-link">
-                        <span class="tw-flex tw-items-center tw-gap-2 tw-text-sm">
-                          <!-- <img
-                          class="tw-w-[20px] tw-h-[20px]"
-                          :src="icon(selected.wallet_id)"
-                          alt=""
-                        /> -->
+                        <span
+                          class="tw-flex tw-items-center tw-gap-2 tw-text-sm"
+                        >
                           <span class="tw-text-xs">
                             {{ selected.wallet_name }}
                           </span>
@@ -41,18 +38,13 @@
                       </span>
                       <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item
-                          v-for="item in wallets"
+                          v-for="item in currencies"
                           :key="item.id"
                         >
                           <span
                             class="tw-flex tw-space-x-2 tw-items-center tw-w-full"
                             @click="selectWallet(item)"
                           >
-                            <!-- <img
-                            class="tw-w-[20px] tw-h-[20px]"
-                            :src="icon(item.wallet_id)"
-                            alt=""
-                          /> -->
                             <span>
                               {{ item.wallet_name }}
                             </span>
@@ -82,9 +74,11 @@
                     >
                       Balance:
                       {{
-                        selected.wallet_symbol +
-                        " " +
-                        selected.wallet_balance_raw
+                        walletBalance(selected) === null
+                          ? "0.00"
+                          : walletBalance(selected).wallet_symbol +
+                            " " +
+                            walletBalance(selected).wallet_balance_raw
                       }}
                     </span>
                   </div>
@@ -107,31 +101,23 @@
                     <el-dropdown trigger="click">
                       <span class="el-dropdown-link">
                         <span class="tw-flex tw-items-center tw-space-x-2">
-                          <!-- <img
-                          class="tw-w-[20px] tw-h-[20px]"
-                          :src="icon(selected2.wallet_id)"
-                          alt=""
-                        /> -->
                           <span class="tw-text-xs">
-                            {{ wallet.wallet_name }}
+                            {{ selected2.wallet_name }}
                           </span>
                           <i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                       </span>
                       <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item
+                          v-for="item in currencies_to"
+                          :key="item.id"
                         >
                           <span
                             class="tw-flex tw-space-x-2 tw-items-center tw-w-full"
                             @click="selectWallet2(item)"
                           >
-                            <!-- <img
-                            class="tw-w-[20px] tw-h-[20px]"
-                            :src="icon(item.wallet_id)"
-                            alt=""
-                          /> -->
                             <span>
-                              {{ wallet.wallet_name }}
+                              {{ item.wallet_name }}
                             </span>
                           </span>
                         </el-dropdown-item>
@@ -151,9 +137,11 @@
                     >
                       Balance:
                       {{
-                        wallet.wallet_symbol +
-                        " " +
-                        wallet.wallet_balance_raw
+                        walletBalance2(selected2) === null
+                          ? "0.00"
+                          : walletBalance2(selected2).wallet_symbol +
+                            " " +
+                            walletBalance2(selected2).wallet_balance_raw
                       }}
                     </span>
                   </div>
@@ -201,6 +189,8 @@
 
 <script>
 import ModalWrapper from "../ModalWrapper.vue";
+import currencies from "@/api/currencies";
+
 export default {
   components: {
     ModalWrapper,
@@ -209,11 +199,12 @@ export default {
     return {
       amount: "",
       wallets: [],
+      currencies: currencies,
       wallet: {},
       isSelected: false,
       isSelected2: false,
-      selectedWallet: {},
       selectedWallet2: {},
+      selectedWallet: {},
       loading: false,
       requestId: null,
       busy: false,
@@ -221,6 +212,7 @@ export default {
       rate: "",
       swapAmount: "",
       percentages: ["25", "50", "75", "100"],
+      currencies_to: [],
     };
   },
 
@@ -230,21 +222,40 @@ export default {
       this.appDomain
         .getWallets(
           this.user.user_id,
-          "usdt,usdt_interest,usdt_referral_bonus"
+          "usdt,usdt_interest,usdt_referral_bonus,tusd"
         )
         .then((res) => {
           console.log(res);
           let resData = res.data;
-          this.wallets = res.data.filter((item) => item.wallet_id !== "usdt");
-          let resPayload = resData.find((item) => item.wallet_id === "usdt");
-          this.wallet = resPayload;
+          this.wallets = resData;
+          // let resPayload = resData.find((item) => item.wallet_id === "tusd");
+          // this.wallet = resPayload;
           this.loading = false;
-          this.swapRate();
         })
         .catch((err) => {
           this.loading = false;
           console.log(err);
         });
+    },
+
+    walletBalance(value) {
+      let balance = this.wallets.find(
+        (item) => item.wallet_id === value.wallet_id
+      );
+      if (balance === undefined) {
+        balance = null;
+      }
+      return balance;
+    },
+
+    walletBalance2(value) {
+      let balance = this.wallets.find(
+        (item) => item.wallet_id === value.wallet_id
+      );
+      if (balance === undefined) {
+        balance = null;
+      }
+      return balance;
     },
 
     swapAction() {
@@ -254,7 +265,6 @@ export default {
     selectWallet(e) {
       this.selectedWallet = e;
       this.isSelected = true;
-      this.swapRate();
     },
 
     selectWallet2(e) {
@@ -268,7 +278,8 @@ export default {
         from: this.selected.wallet_id,
         to: this.selected2.wallet_id,
       };
-      this.middleware.getStakeRate(data)
+      this.middleware
+        .getStakeRate(data)
         .then((res) => {
           console.log(res, "ommo");
           let resPayload = res.data;
@@ -294,9 +305,10 @@ export default {
         amount_to_swap: this.amount,
         request_id: this.requestId,
       };
-      this.middleware.swap(formData)
-      // this.$axios
-      //   .post(`${process.env.VUE_APP_MIDDLEWARE_API_URL}swap`, formData)
+      this.middleware
+        .swap(formData)
+        // this.$axios
+        //   .post(`${process.env.VUE_APP_MIDDLEWARE_API_URL}swap`, formData)
         .then((res) => {
           console.log(res);
           this.busy = false;
@@ -333,6 +345,17 @@ export default {
         this.swapAmount = this.rate * val;
       },
     },
+
+    selected: {
+      handler(val) {
+        this.selectedWallet = val;
+        this.isSelected = true;
+        this.currencies_to = val.currencies_to;
+        this.swapRate();
+      },
+      immediate: true,
+      deep: true,
+    },
   },
 
   beforeMount() {
@@ -349,7 +372,7 @@ export default {
     selected() {
       var selectedValue = {};
       if (!this.isSelected) {
-        selectedValue = this.wallets[0];
+        selectedValue = this.currencies[0];
       } else {
         selectedValue = this.selectedWallet;
       }
@@ -358,7 +381,11 @@ export default {
 
     selected2() {
       var selectedValue = {};
-      selectedValue = this.wallet;
+      if (!this.isSelected2) {
+        selectedValue = this.selected.currencies_to[0];
+      } else {
+        selectedValue = this.selectedWallet2;
+      }
       return selectedValue;
     },
   },
@@ -366,9 +393,7 @@ export default {
 </script>
 
 <style scoped>
-
 .input-amount {
   border: 0 !important;
 }
-
 </style>
