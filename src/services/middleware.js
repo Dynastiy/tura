@@ -1,5 +1,5 @@
 import $request from "axios";
-const baseURL = "https://middleware-flash.samzugagpt.com/"
+const baseURL = "https://middleware-flash.turaai.com/"
 
 const middleware = {
  
