@@ -3,8 +3,8 @@ const baseURL = "https://middleware-rimplenet-general.turaai.com/"
 
 const withdrawal = {
   // Request Withdrawal
-  async requestWithdrawal(formData) {
-    return $request.post(`${baseURL}withdrawal/request`, formData).then((response) => response.data)
+  async requestWithdrawal(formData, headers) {
+    return $request.post(`${baseURL}withdrawal/request`, formData, { headers }).then((response) => response.data)
   },
 
 };

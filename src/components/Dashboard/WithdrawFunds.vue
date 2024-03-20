@@ -4,10 +4,13 @@
       <h5 class="tw-mb-0 tw-text-white tw-font-semibold">Withdraw Funds</h5>
     </template>
     <template #body>
-      <div class="">
+      <div v-if="busy">
+        <i-icon icon="eos-icons:loading" class="tw-text-white tw-text-[50px]"/>
+      </div>
+      <div class="" v-else>
         <div class="tw-flex tw-flex tw-justify-end tw-mb-2">
           <h6 class="tw-text-white tw-bg-red-600 tw-w-fit tw-px-2 tw-py-1 tw-rounded-xl tw-text-xs">
-            * Minimum Withdrawal: $5
+            * Minimum Withdrawal: 5 TUSD
           </h6>
         </div>
         <validation-observer v-slot="{ invalid, handleSubmit }">
@@ -161,6 +164,7 @@ export default {
       balances: [],
       wallet: {},
       insuffientBalance: false,
+      busy: false
     };
   },
 
@@ -200,17 +204,17 @@ export default {
     },
 
     getBalances() {
-      this.loading = true;
+      this.busy = true;
       this.appDomain
         .getWallets(this.user.user_id, "tusd")
         .then((res) => {
           console.log(res);
           this.balances = res.data;
           this.wallet = res.data[0];
-          this.loading = false;
+          this.busy = false;
         })
         .catch((err) => {
-          this.loading = false;
+          this.busy = false;
           console.log(err);
         });
     },
@@ -226,13 +230,17 @@ export default {
       this.loading = true;
       const payload = {
         wallet_id: "tusd",
-        user_id: this.user.user_id,
+        user_id: +(this.user.user_id),
         withdrawal_amount: this.amount,
         withdrawal_address_to: this.address_to,
         request_id: this.requestId,
       };
+      const accessToken = localStorage.getItem('tura_token');
+      const headers = {
+        "Authorization": `Bearer ${accessToken}`
+      }
       this.withdrawal
-        .requestWithdrawal(payload)
+        .requestWithdrawal(payload, headers)
         .then((res) => {
           console.log(res);
           this.getBalances();
@@ -248,7 +256,7 @@ export default {
           this.loading = false;
           console.log(err);
           this.$toast.open({
-            message: `${err.data.message}`,
+            message: `${err.response.data.message}`,
             type: "error",
             position: "top",
             // all of other options may go here
