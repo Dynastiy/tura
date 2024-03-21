@@ -75,7 +75,7 @@
 
             <validation-provider
               name="amount"
-              rules="required"
+              rules="required|min_value:5"
               class="tw-mb-5 tw-block"
               v-slot="{ errors }"
             >
@@ -244,7 +244,7 @@ export default {
         .then((res) => {
           console.log(res);
           this.getBalances();
-          var responsePayload = res.data;
+          var responsePayload = res;
           this.$toast.open({
             message: `${responsePayload.message}`,
             type: "success",

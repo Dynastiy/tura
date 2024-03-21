@@ -5,10 +5,11 @@ const currencies = [
     currencies_to: [
       {
         wallet_id: "tusd",
-        wallet_name: "TUSD",
+        wallet_name: "TUSD Wallet",
       },
     ],
   },
+
   {
     wallet_id: "usdt_referral_bonus",
     wallet_name: "USDT Referral Bonus",
@@ -16,6 +17,17 @@ const currencies = [
       {
         wallet_id: "usdt",
         wallet_name: "USDT Main Wallet",
+      },
+    ],
+  },
+
+  {
+    wallet_id: "usdt",
+    wallet_name: "USDT Wallet",
+    currencies_to: [
+      {
+        wallet_id: "tusd",
+        wallet_name: "TUSD Wallet",
       },
     ],
   },

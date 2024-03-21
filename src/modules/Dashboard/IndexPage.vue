@@ -24,7 +24,7 @@
         </div>
       </template>
 
-      <div class="tw-flex  tw-flex-col tw-gap-3">
+      <div class="tw-flex lg:tw-flex-row md:tw-flex-row tw-flex-col tw-gap-3">
         <div
           class="tw-px-4 md:tw-w-3/5 lg:tw-w-3/5 tw-py-3 tw-rounded-lg wallet tw-w-full"
         >
@@ -58,7 +58,7 @@
             </div>
           </div>
         </div>
-        <div class="tw-w-full tw-grid lg:tw-grid-cols-4 md:grid-cols-4 tw-grid-cols-2 tw-gap-3">
+        <div class="tw-w-full tw-grid lg:tw-grid-cols-3 md:grid-cols-3 tw-grid-cols-3 tw-gap-3">
           <div
             v-for="(item, idx) in balances"
             :key="idx"
@@ -240,21 +240,21 @@ export default {
       if (value === "usdt") {
         return "main balance";
       }
-      if (value === "usdt_locked") {
-        return "withdrawal balance";
-      }
+      // if (value === "usdt_locked") {
+      //   return "withdrawal balance";
+      // }
       if (value === "usdt_referral_bonus") {
         return "referral bonus";
       }
       if (value === "tusd") {
-        return "tusd";
+        return "withdrawal balance (tusd)";
       }
       return;
     },
 
     getStakingBalances() {
       this.appDomain
-        .getWallets(this.user.user_id, "usdt,usdt_locked,usdt_referral_bonus,tusd")
+        .getWallets(this.user.user_id, "usdt,usdt_referral_bonus,tusd")
         .then((res) => {
           console.log(res);
           this.balances = res.data;

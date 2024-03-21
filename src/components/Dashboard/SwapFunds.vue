@@ -293,7 +293,8 @@ export default {
     },
 
     getAmountByPercentage(value) {
-      this.amount = this.selected.wallet_balance_raw * (value / 100);
+      // console.log(this.walletBalance(this.selected))
+      this.amount = this.walletBalance(this.selected).wallet_balance_raw * (value / 100);
     },
 
     swap() {
